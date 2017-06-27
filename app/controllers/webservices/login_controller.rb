@@ -9,7 +9,7 @@ class Webservices::LoginController < WebservicesController
   	error 500, "Erro desconhecido"
   	example " { :name => 'Fulano de Tal', :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', :membership => '82736482', :civil_registry => '123123', :cpf => '999.999.999-99', :birthday => '99/99/1999', :marital_status => 'Casado', :occupation => 'Pedreiro', :address => 'Rua Teste 34, Pinheiro, São Paulo - SP', :education_level => 'Bacharel', :accepted_terms => true } "
 	def signin
-		u = User.where(:cpf => params[:cpf], :user_type => 'User').first
+		u = User.where(:cpf => params[:cpf]).first
 
 		if !u.nil?
 			if u.valid_password?(params[:password])
