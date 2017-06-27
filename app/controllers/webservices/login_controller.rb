@@ -22,8 +22,7 @@ class Webservices::LoginController < WebservicesController
 			render :json => { :message => 'CPF não cadastrado em nosso sistema' }, :status => 401
 		end
 	end
-
-
+	
 	api :POST, '/login/signup', "User sign up"
   	formats ['json']
   	param :name, String, :desc => 'Ex: Fulano de Tal', :required => true, :missing_message => lambda { "Nome é requerido" }
@@ -57,6 +56,7 @@ class Webservices::LoginController < WebservicesController
 			u.address = params[:address]
 			u.education_level = params[:education_level]
 			u.picture = params[:picture]
+			u.accepted_terms = params[:accepted_terms]
 			u.password = '12345678'
 			u.password_confirmation = '12345678'
 			u.save(validate: false)
