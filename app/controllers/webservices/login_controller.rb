@@ -60,7 +60,7 @@ class Webservices::LoginController < WebservicesController
 			u.password = '12345678'
 			u.password_confirmation = '12345678'
 			u.save(validate: false)
-
+			
 			render :json => User.mapuser(u)
 		end
 	end
