@@ -38,13 +38,13 @@ class User
   field :picture_file_name, type: String
   field :picture_file_size, type: String
   field :picture_content_type, type: String
+  field :user_type, type: String, default: 'User'
   
-
   has_mongoid_attached_file :picture, 
     :styles => { :medium => "320x320>", :thumb => "160x160#" },
     :storage        => :s3,
-    :bucket_name    => 'PainelMobile',
-    :bucket    => 'PainelMobile',
+    :bucket_name    => 'TorcidaLegal',
+    :bucket    => 'TorcidaLegal',
     :path           => ':attachment/:id/:style.:extension',
     :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
   validates_attachment_size :picture, :less_than => 5.megabytes
@@ -54,6 +54,11 @@ class User
   # field :confirmed_at,         type: Time
   # field :confirmation_sent_at, type: Time
   # field :unconfirmed_email,    type: String # Only if using reconfirmable
+
+  def self.mapuser (u)
+    { :name => u.name, :picture => u.picture, :membership => u.membership, :civil_registry => u.civil_registry, :cpf => u.cpf, :birthday => u.birthday, :marital_status => u.marital_status, :occupation => u.occupation, :address => u.address, :education_level => u.education_level, :accepted_terms => u.accepted_terms }
+  end
+
 
   ## Lockable
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts

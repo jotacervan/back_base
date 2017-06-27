@@ -1,2 +1,6 @@
 <h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<p>Find me in app/views/home/index.html.erb </p>
+<% if user_signed_in? %>
+	<a href="/users/sign_out" data-method="delete" data-confirm="Are you sure do you want to logout?">Logout</a><br>
+<% end %>
+<br>
