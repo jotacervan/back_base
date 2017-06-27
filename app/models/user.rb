@@ -1,5 +1,7 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Paperclip
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -15,7 +17,7 @@ class User
 
   ## Rememberable
   field :remember_created_at, type: Time
-
+  
   ## Trackable
   field :sign_in_count,      type: Integer, default: 0
   field :current_sign_in_at, type: Time
@@ -33,7 +35,20 @@ class User
   field :address, type: String
   field :education_level, type: String
   field :accepted_terms, type: Mongoid::Boolean, default: false
+  field :picture_file_name, type: String
+  field :picture_file_size, type: String
+  field :picture_content_type, type: String
   
+
+  has_mongoid_attached_file :picture, 
+    :styles => { :medium => "320x320>", :thumb => "160x160#" },
+    :storage        => :s3,
+    :bucket_name    => 'PainelMobile',
+    :bucket    => 'PainelMobile',
+    :path           => ':attachment/:id/:style.:extension',
+    :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
+  validates_attachment_size :picture, :less_than => 5.megabytes
+  validates_attachment_content_type :picture, :content_type => ['image/jpeg', 'image/png', 'image/jpg']
   ## Confirmable
   # field :confirmation_token,   type: String
   # field :confirmed_at,         type: Time
