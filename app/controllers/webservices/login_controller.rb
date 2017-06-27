@@ -35,7 +35,7 @@ class Webservices::LoginController < WebservicesController
   	param :occupation, String, :desc => 'Ex: Pedreiro'
   	param :address, String, :desc => 'Ex: Rua Janio 45, bloco A, São Paulo - SP'
   	param :education_level, String, :desc => 'Ex: Ensino Superior Completo, Incompleto'
-  	param :accepted_terms, Boolean, :desc => 'Aceita os termos de uso', :required => true, :missing_message => lambda { "Aceite os termos" }
+  	param :accepted_terms, String, :desc => 'Ex: true, false, 1 = true, 0 = false', :required => true, :missing_message => lambda { "Aceite os termos" }
   	param :picture, String, :desc => 'Multipart Image'
   	error 403, "CPF já cadastrado em nosso sistema"
   	error 500, "Erro desconhecido"
