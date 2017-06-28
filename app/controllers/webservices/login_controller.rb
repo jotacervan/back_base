@@ -7,7 +7,37 @@ class Webservices::LoginController < WebservicesController
   	error 401, "CPF não cadastrado em nosso sistema"
   	error 402, "Senha Invalida"
   	error 500, "Erro desconhecido"
-  	example " { :message => 'Login efetuado com Sucesso', :user => { :id => 192863tgv9146v4910y1b4, :name => 'Fulano de Tal', :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', :membership => '82736482', :civil_registry => '123123', :cpf => '999.999.999-99', :birthday => '99/99/1999', :marital_status => 'Casado', :occupation => 'Pedreiro', :address => 'Rua Teste 34, Pinheiro, São Paulo - SP', :education_level => 'Bacharel', :accepted_terms => true } } "
+  	example "Exemplo de retorno quando login for realizado com sucesso
+
+  	{ 
+  		:message => 'Login efetuado com Sucesso', 
+  		:user => { 
+  			:id => 192863tgv9146v4910y1b4, 
+  			:name => 'Fulano de Tal', 
+  			:udid => 123123, 
+  			:status => 1, 
+  			:picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+  			:membership => '82736482', 
+  			:civil_registry => '123123', 
+  			:cpf => '999.999.999-99', 
+  			:birthday => '99/99/1999', 
+  			:marital_status => 'Casado', 
+  			:occupation => 'Pedreiro', 
+  			:address => 'Rua Teste 34, Pinheiro, São Paulo - SP', 
+  			:education_level => 'Bacharel', 
+  			:accepted_terms => true 
+  		} 
+  	} "
+  	example "Exemplo de retorno quando senha for incorreta
+
+  	{ 
+  		:message => 'Senha Invalida', 
+  	} "
+  	example "Exemplo de retorno quando CPF não for encontrado no sistema
+
+  	{ 
+  		:message => 'CPF não cadastrado em nosso sistema', 
+  	} "
 	def signin
 		u = User.where(:cpf => params[:cpf]).first
 
@@ -26,19 +56,45 @@ class Webservices::LoginController < WebservicesController
 	api :POST, '/login/signup', "User sign up"
   	formats ['json']
   	param :name, String, :desc => 'Ex: Fulano de Tal', :required => true, :missing_message => lambda { "Nome é requerido" }
-  	param :membership, String, :desc => 'Ex: 24523523'
-  	param :civil_registry, String, :desc => 'Ex: 45342252'
+  	param :password, String, :desc => 'Senha', :required => true, :missing_message => lambda { "Senha é requerido" }
+  	param :udid, String, :desc => 'UDID', :required => true, :missing_message => lambda { "UDID é requerido" }
+  	param :membership, String, :desc => 'Filiação'
+  	param :civil_registry, String, :desc => 'Registro Civil'
   	param :cpf, String, :desc => 'Ex: 999.999.999-99', :required => true, :missing_message => lambda { "CPF requerido" }
   	param :birthday, String, :desc => 'Ex: 05/04/1980'
   	param :marital_status, String, :desc => 'Ex: Casado, Solteiro, Divorciado, Viuvo'
   	param :occupation, String, :desc => 'Ex: Pedreiro'
   	param :address, String, :desc => 'Ex: Rua Janio 45, bloco A, São Paulo - SP'
-  	param :education_level, String, :desc => 'Ex: Ensino Superior Completo, Incompleto'
+  	param :education_level, String, :desc => 'Escolaridade'
   	param :accepted_terms, String, :desc => 'Ex: true, false, 1 = true, 0 = false', :required => true, :missing_message => lambda { "Aceite os termos" }
-  	param :picture, String, :desc => 'Multipart Image'
   	error 403, "CPF já cadastrado em nosso sistema"
   	error 500, "Erro desconhecido"
-  	example " { :message => 'Cadastro realizado com Sucesso', :user => { :name => 'Fulano de Tal', :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', :membership => '82736482', :civil_registry => '123123', :cpf => '999.999.999-99', :birthday => '99/99/1999', :marital_status => 'Casado', :occupation => 'Pedreiro', :address => 'Rua Teste 34, Pinheiro, São Paulo - SP', :education_level => 'Bacharel', :accepted_terms => true } } "
+  	example "Exemplo de retorno quando cadastro for realizado com sucesso 
+
+  	{ 
+  	 	:message => 'Cadastro realizado com Sucesso', 
+  	  	:user => { 
+  	  		:id => 192863tgv9146v4910y1b4, 
+  	  		:name => 'Fulano de Tal', 
+  	  		:udid => 123123, 
+  	  		:status => 1,
+  	  		:membership => '82736482', 
+  	  		:civil_registry => '123123', 
+  	  		:cpf => '999.999.999-99', 
+  	  		:birthday => '99/99/1999', 
+  	  		:marital_status => 'Casado', 
+  	  		:occupation => 'Pedreiro',
+  	  		:address => 'Rua Teste 34, Pinheiro, São Paulo - SP', 
+  	  		:education_level => 'Bacharel', 
+  	  		:accepted_terms => true 
+  	  	}
+  	} "
+  	example "Exemplo de retorno quando CPF já tiver cadastro 
+
+  	{ 
+  		:message => 'CPF já cadastrado em nosso sistema' 
+  	}"
+
 	def signup
 		u = User.where(:cpf => params[:cpf], :user_type => 'User').first
 
@@ -55,10 +111,11 @@ class Webservices::LoginController < WebservicesController
 			u.occupation = params[:occupation]
 			u.address = params[:address]
 			u.education_level = params[:education_level]
-			u.picture = params[:picture]
 			u.accepted_terms = params[:accepted_terms]
-			u.password = '12345678'
-			u.password_confirmation = '12345678'
+			u.password = params[:password]
+			u.password_confirmation = params[:password]
+			u.udid = params[:udid]
+			u.status = 1
 			u.save(validate: false)
 			
 			render :json => { :message => 'Cadastro Realizado com Sucesso', :user => User.mapuser(u) }

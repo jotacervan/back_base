@@ -39,6 +39,8 @@ class User
   field :picture_file_size, type: String
   field :picture_content_type, type: String
   field :user_type, type: String, default: 'User'
+  field :status, type: Integer, default: 0
+  field :udid, type: String
   
   has_mongoid_attached_file :picture, 
     :styles => { :medium => "320x320>", :thumb => "160x160#" },
@@ -56,7 +58,7 @@ class User
   # field :unconfirmed_email,    type: String # Only if using reconfirmable
 
   def self.mapuser (u)
-    { :name => u.name, :picture => u.picture, :membership => u.membership, :civil_registry => u.civil_registry, :cpf => u.cpf, :birthday => u.birthday, :marital_status => u.marital_status, :occupation => u.occupation, :address => u.address, :education_level => u.education_level, :accepted_terms => u.accepted_terms }
+    { :id => u.id.to_s, :name => u.name, :udid => u.udid, :status => u.status, :picture => u.picture, :membership => u.membership, :civil_registry => u.civil_registry, :cpf => u.cpf, :birthday => u.birthday, :marital_status => u.marital_status, :occupation => u.occupation, :address => u.address, :education_level => u.education_level, :accepted_terms => u.accepted_terms }
   end
 
 
