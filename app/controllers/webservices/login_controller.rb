@@ -7,14 +7,14 @@ class Webservices::LoginController < WebservicesController
   	error 401, "CPF não cadastrado em nosso sistema"
   	error 402, "Senha Invalida"
   	error 500, "Erro desconhecido"
-  	example " { :name => 'Fulano de Tal', :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', :membership => '82736482', :civil_registry => '123123', :cpf => '999.999.999-99', :birthday => '99/99/1999', :marital_status => 'Casado', :occupation => 'Pedreiro', :address => 'Rua Teste 34, Pinheiro, São Paulo - SP', :education_level => 'Bacharel', :accepted_terms => true } "
+  	example " { :message => 'Login efetuado com Sucesso', :user => { :id => 192863tgv9146v4910y1b4, :name => 'Fulano de Tal', :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', :membership => '82736482', :civil_registry => '123123', :cpf => '999.999.999-99', :birthday => '99/99/1999', :marital_status => 'Casado', :occupation => 'Pedreiro', :address => 'Rua Teste 34, Pinheiro, São Paulo - SP', :education_level => 'Bacharel', :accepted_terms => true } } "
 	def signin
 		u = User.where(:cpf => params[:cpf]).first
 
 		if !u.nil?
 			if u.valid_password?(params[:password])
 				sign_in u, :bypass => true
-				render :json => User.mapuser(u)
+				render :json => { :message => 'Login efetuado com Sucesso', :user => User.mapuser(u) }
 			else
 				render :json => { :message => 'Senha Invalida' }, :status => 402
 			end
@@ -38,7 +38,7 @@ class Webservices::LoginController < WebservicesController
   	param :picture, String, :desc => 'Multipart Image'
   	error 403, "CPF já cadastrado em nosso sistema"
   	error 500, "Erro desconhecido"
-  	example " { :name => 'Fulano de Tal', :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', :membership => '82736482', :civil_registry => '123123', :cpf => '999.999.999-99', :birthday => '99/99/1999', :marital_status => 'Casado', :occupation => 'Pedreiro', :address => 'Rua Teste 34, Pinheiro, São Paulo - SP', :education_level => 'Bacharel', :accepted_terms => true } "
+  	example " { :message => 'Cadastro realizado com Sucesso', :user => { :name => 'Fulano de Tal', :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', :membership => '82736482', :civil_registry => '123123', :cpf => '999.999.999-99', :birthday => '99/99/1999', :marital_status => 'Casado', :occupation => 'Pedreiro', :address => 'Rua Teste 34, Pinheiro, São Paulo - SP', :education_level => 'Bacharel', :accepted_terms => true } } "
 	def signup
 		u = User.where(:cpf => params[:cpf], :user_type => 'User').first
 
@@ -61,7 +61,7 @@ class Webservices::LoginController < WebservicesController
 			u.password_confirmation = '12345678'
 			u.save(validate: false)
 			
-			render :json => User.mapuser(u)
+			render :json => { :message => 'Cadastro Realizado com Sucesso', :user => User.mapuser(u) }
 		end
 	end
 
