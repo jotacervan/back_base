@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   namespace :webservices do
 	post '/login/signin'
 	post '/login/signup'
-	post '/login/signout'
+	post '/login/update_photos'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
