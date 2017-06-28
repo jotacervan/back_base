@@ -47,6 +47,8 @@ class User
   field :user_type, type: String, default: 'User'
   field :status, type: Integer, default: 0
   field :udid, type: String
+  field :security_question, type: String
+  field :security_answer, type: String
   
   has_mongoid_attached_file :picture, 
     :styles => { :medium => "320x320>", :thumb => "160x160#" },

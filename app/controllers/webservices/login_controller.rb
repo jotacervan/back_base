@@ -68,11 +68,11 @@ class Webservices::LoginController < WebservicesController
   	param :occupation, String, :desc => 'Ex: Pedreiro'
   	param :address, String, :desc => 'Ex: Rua Janio 45, bloco A, São Paulo - SP'
   	param :education_level, String, :desc => 'Escolaridade'
-  	param :accepted_terms, String, :desc => 'Ex: true, false, 1 = true, 0 = false', :required => true, :missing_message => lambda { "Aceite os termos" }
+  	param :accepted_terms, Boolean, :desc => 'Ex: true, false', :required => true, :missing_message => lambda { "Aceite os termos" }
   	error 403, "CPF já cadastrado em nosso sistema"
   	error 500, "Erro desconhecido"
   	example "Exemplo de retorno quando cadastro for realizado com sucesso 
-
+  	
   	{ 
   	 	:message => 'Cadastro realizado com Sucesso', 
   	  	:user => { 
@@ -122,6 +122,7 @@ class Webservices::LoginController < WebservicesController
 			u.status = 1
 			u.save(validate: false)
 			
+			sign_in u, :bypass => true
 			render :json => { :message => 'Cadastro Realizado com Sucesso', :user => User.mapuser(u) }
 		end
 	end
@@ -176,6 +177,56 @@ class Webservices::LoginController < WebservicesController
 		else
 			u.picture = params[:picture] 
 			u.doc_front = params[:doc_front]
+			u.doc_back = params[:doc_back]
+			u.status = 2
+			u.save(validate: false)
+			
+			render :json => { :message => 'Fotos inseridas com sucesso', :user => User.mapuser(u) }
+		end
+	end
+
+	api :POST, '/login/update_question', "Update Question From User"
+  	formats ['json']
+  	param :id, String, :desc => 'Ex: 1234123hb14b1234i12,
+ ID é encontrado no json de retorno param[:user][:id]', :required => true, :missing_message => lambda { "id é requerido" }
+  	error 404, "Usuario não encontrado no sistema"
+  	error 500, "Erro desconhecido"
+  	example "Exemplo de retorno quando fotos forem inserida com sucesso 
+
+  	{ 
+  	 	:message => 'Fotos inseridas com sucesso', 
+  	  	:user => { 
+  	  		:id => 192863tgv9146v4910y1b4, 
+  	  		:name => 'Fulano de Tal', 
+  	  		:udid => 123123, 
+  	  		:status => 1,
+  	  		:picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+  			:doc_front => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+  			:doc_back => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
+  	  		:membership => '82736482', 
+  	  		:civil_registry => '123123', 
+  	  		:cpf => '999.999.999-99', 
+  	  		:birthday => '99/99/1999', 
+  	  		:marital_status => 'Casado', 
+  	  		:occupation => 'Pedreiro',
+  	  		:address => 'Rua Teste 34, Pinheiro, São Paulo - SP', 
+  	  		:education_level => 'Bacharel', 
+  	  		:accepted_terms => true 
+  	  	}
+  	} "
+  	example "Exemplo de retorno quando usuario não for encontrado 
+
+  	{ 
+  		:message => 'Usuario não encontrado no sistema' 
+  	}"
+	def update_question
+		u = User.find(params[:id]) rescue nil
+
+		if !u.nil?
+			render :json => { :message => 'Usuario não encontrado no sistema' }, :status => 404
+		else
+			u.security_question = params[:security_question] 
+			u.security_ = params[:doc_front]
 			u.doc_back = params[:doc_back]
 			u.status = 2
 			u.save(validate: false)
