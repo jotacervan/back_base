@@ -1,5 +1,8 @@
 class Webservices::LoginController < WebservicesController
 	
+	# =============================================================
+	# 					       SIGNIN METHOD
+	# =============================================================
 	api :POST, '/login/signin', "User sign in"
   	formats ['json']
   	param :cpf, String, :desc => "CPF ( 999.999.999-99 )", :required => true, :missing_message => lambda { "CPF ausente" }
@@ -54,7 +57,11 @@ class Webservices::LoginController < WebservicesController
 			render :json => { :message => 'CPF não cadastrado em nosso sistema' }, :status => 401
 		end
 	end
-	
+
+
+	# =============================================================
+	# 					       SIGNUP METHOD
+	# =============================================================
 	api :POST, '/login/signup', "User sign up"
   	formats ['json']
   	param :name, String, :desc => 'Ex: Fulano de Tal', :required => true, :missing_message => lambda { "Nome é requerido" }
@@ -72,7 +79,7 @@ class Webservices::LoginController < WebservicesController
   	error 403, "CPF já cadastrado em nosso sistema"
   	error 500, "Erro desconhecido"
   	example "Exemplo de retorno quando cadastro for realizado com sucesso 
-  	
+
   	{ 
   	 	:message => 'Cadastro realizado com Sucesso', 
   	  	:user => { 
@@ -128,6 +135,9 @@ class Webservices::LoginController < WebservicesController
 	end
 
 
+	# =============================================================
+	# 					 UPDATE PHOTOS METHOD
+	# =============================================================
 	api :POST, '/login/update_photos', "Update Photos From User"
   	formats ['json']
   	param :id, String, :desc => 'Ex: 1234123hb14b1234i12,
@@ -185,39 +195,45 @@ class Webservices::LoginController < WebservicesController
 		end
 	end
 
+
+	# =============================================================
+	# 					 UPDATE QUESTION METHOD
+	# =============================================================
 	api :POST, '/login/update_question', "Update Question From User"
   	formats ['json']
   	param :id, String, :desc => 'Ex: 1234123hb14b1234i12,
  ID é encontrado no json de retorno param[:user][:id]', :required => true, :missing_message => lambda { "id é requerido" }
+ 	param :security_question, String, :desc => 'Questão de Segurança', :required => true, :missing_message => lambda { "Questão de segurança é requerida" }
+ 	param :security_answer, String, :desc => 'Resposta de Segurança', :required => true, :missing_message => lambda { "Resposta de segurança é requerida" }
   	error 404, "Usuario não encontrado no sistema"
   	error 500, "Erro desconhecido"
   	example "Exemplo de retorno quando fotos forem inserida com sucesso 
-
+  	
   	{ 
-  	 	:message => 'Fotos inseridas com sucesso', 
+  	 	:message => 'Questão inserida com sucesso',
   	  	:user => { 
-  	  		:id => 192863tgv9146v4910y1b4, 
-  	  		:name => 'Fulano de Tal', 
-  	  		:udid => 123123, 
+  	  		:id => 192863tgv9146v4910y1b4,
+  	  		:name => 'Fulano de Tal',
+  	  		:udid => 123123,
   	  		:status => 1,
-  	  		:picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
-  			:doc_front => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+  	  		:picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
+  			:doc_front => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
   			:doc_back => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
-  	  		:membership => '82736482', 
-  	  		:civil_registry => '123123', 
-  	  		:cpf => '999.999.999-99', 
-  	  		:birthday => '99/99/1999', 
+  	  		:membership => '82736482',
+  	  		:civil_registry => '123123',
+  	  		:cpf => '999.999.999-99',
+  	  		:birthday => '99/99/1999',
   	  		:marital_status => 'Casado', 
   	  		:occupation => 'Pedreiro',
   	  		:address => 'Rua Teste 34, Pinheiro, São Paulo - SP', 
-  	  		:education_level => 'Bacharel', 
-  	  		:accepted_terms => true 
+  	  		:education_level => 'Bacharel',
+  	  		:accepted_terms => true
   	  	}
-  	} "
+  	}"
   	example "Exemplo de retorno quando usuario não for encontrado 
 
   	{ 
-  		:message => 'Usuario não encontrado no sistema' 
+  		:message => 'Usuario não encontrado no sistema'
   	}"
 	def update_question
 		u = User.find(params[:id]) rescue nil
@@ -225,13 +241,12 @@ class Webservices::LoginController < WebservicesController
 		if !u.nil?
 			render :json => { :message => 'Usuario não encontrado no sistema' }, :status => 404
 		else
-			u.security_question = params[:security_question] 
-			u.security_ = params[:doc_front]
-			u.doc_back = params[:doc_back]
-			u.status = 2
+			u.security_question = params[:security_question]
+			u.security_answer = params[:security_answer]
+			u.status = 3
 			u.save(validate: false)
 			
-			render :json => { :message => 'Fotos inseridas com sucesso', :user => User.mapuser(u) }
+			render :json => { :message => 'Questão inserida com sucesso', :user => User.mapuser(u) }
 		end
 	end
 
