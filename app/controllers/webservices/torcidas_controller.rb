@@ -11,7 +11,10 @@ class Webservices::TorcidasController < WebservicesController
 
 	{ 
 		:message => 'Times carregados com sucesso',
-		:questions => ''
+		:torcidas => [
+			{ :id => '12381763782618s78', :name => 'Time tal', :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989' },
+			{ :id => '12381763782618s78', :name => 'Time tal', :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989' }
+		]
 	}"
 	example "Exemplo de retorno quando não estiver feito login
 
@@ -29,7 +32,7 @@ class Webservices::TorcidasController < WebservicesController
 		if t.blank?
 			render :json => { :message => 'Nenhuma torcida encontrada' }, :status => 402
 		else
-			render :json => { :message => 'Torcidas carregadas com sucesso', :questions => Torcida.mapTorcida(t) }
+			render :json => { :message => 'Torcidas carregadas com sucesso', :torcidas => Torcida.mapTorcida(t) }
 		end
 	end
 end

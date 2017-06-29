@@ -10,7 +10,10 @@ class Webservices::TimesController < WebservicesController
 
 	{ 
 		:message => 'Times carregados com sucesso',
-		:questions => ''
+		:times => [
+			{ :id => '12381763782618s78', :name => 'Time tal', :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989' },
+			{ :id => '12381763782618s78', :name => 'Time tal', :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989' }
+		]
 	}"
 	example "Exemplo de retorno quando não estiver feito login
 
@@ -28,7 +31,7 @@ class Webservices::TimesController < WebservicesController
 		if c.nil?
 			render :json => { :message => 'Nenhum time encontrado' }, :status => 402
 		else
-			render :json => { :message => 'Times carregados com sucesso', :questions => Clube.mapClube(c) }
+			render :json => { :message => 'Times carregados com sucesso', :times => Clube.mapClube(c) }
 		end
 	end
 end

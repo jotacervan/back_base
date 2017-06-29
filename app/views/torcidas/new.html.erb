@@ -1,0 +1,10 @@
+<%= form_for @torcida do |f| %>
+	<%= f.text_field :name %>
+	<%= f.file_field :picture %>
+	<%= f.select(:clube_id) do %>
+		<% @clubes.each do |c| %>
+			<%= content_tag(:option, c.name, value: c.id) %>
+		<% end %>
+	<% end %>
+	<%= f.submit %>
+<% end %>

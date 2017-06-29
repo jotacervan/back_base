@@ -24,7 +24,7 @@ class Torcida
   def self.mapTorcida(c)
     arr = []
     c.each do |cu|
-      arr <<  { :id => cu.id, :name => cu.name, :picture => cu.picture }
+      arr <<  { :id => cu.id.to_s, :name => cu.name, :picture => cu.picture }
     end
     arr
   end
