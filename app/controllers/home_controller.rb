@@ -4,6 +4,7 @@ class HomeController < ApplicationController
 	def index
 		@users = User.where(:user_type => 'User')
 		@questions = Question.all
+		@backlog = Backlog.all.order(created_at: :desc)
 		@page = 'Home'
 	end
 	

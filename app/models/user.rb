@@ -87,9 +87,9 @@ class User
   # field :unconfirmed_email,    type: String # Only if using reconfirmable
 
   after_create :backlog
-
+  
   def backlog
-    Backlog.create(:description => self.name + ' se cadastrou no aplicativo')
+    Backlog.create(:description => self.name + ' realizou o cadastrou no aplicativo')
   end
 
   def self.mapuser (u)
