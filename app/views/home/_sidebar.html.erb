@@ -25,9 +25,9 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li <% if @page == 'Home' %> class="active" <% end %> ><a><i class="fa fa-home"></i> Home</a>
+                  <li <% if @page == 'Home' %> class="active" <% end %> ><a href="<%= root_path %>"><i class="fa fa-home"></i> Home</a>
                   </li>
-                  <li><a><i class="fa fa-user"></i> Usuários</a>
+                  <li><a href="<%= users_path %>"><i class="fa fa-user"></i> Usuários</a>
                   </li>
                   <li><a><i class="fa fa-table"></i> Perguntas</a></li>
                 </ul>

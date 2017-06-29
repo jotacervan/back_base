@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Torcida Legal</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <%= csrf_meta_tags %>
+    
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        
+        <%= render 'home/sidebar' %>
+
+        <%= render 'home/topbar' %>
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Perfil do Usuário</h3>
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>User Report <small>Activity report</small></h2>
+                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                      <div class="profile_img">
+                        <div id="crop-avatar">
+                          <!-- Current avatar -->
+                          <img class="img-responsive avatar-view" src="<%= @user.picture %>" alt="Avatar" title="Change the avatar">
+                        </div>
+                      </div>
+                      <h3><%= @user.name %></h3>
+
+                      <ul class="list-unstyled user_data">
+                        <li><i class="fa fa-map-marker user-profile-icon"></i> <%= @user.address %>
+                        </li>
+
+                        <li>
+                          <i class="fa fa-briefcase user-profile-icon"></i> <%= @user.occupation %>
+                        </li>
+
+                      </ul>
+                      <br />
+
+
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+
+
+                      <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Atividades Recentes</a>
+                          </li>
+                          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Perfil</a>
+                          </li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                          <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+
+                            <!-- start recent activity -->
+                            <ul class="messages">
+                              <li>
+                                <img src="<%= @user.picture.url(:thumb) %>" class="avatar" alt="Avatar">
+                                <div class="message_date">
+                                  <h3 class="date text-info"><%= @user.created_at.strftime('%d') %></h3>
+                                  <p class="month"><%= @user.created_at.strftime('%h') %></p>
+                                </div>
+                                <div class="message_wrapper">
+                                  <h4 class="heading">Cadastro Realizado</h4>
+                                  <blockquote class="message"><%= @user.name %> se cadastrou no sistema</blockquote>
+                                  <br />
+                                </div>
+                              </li>
+                            </ul>
+                            <!-- end recent activity -->
+
+                          </div>
+                          
+                          <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                          	<div class="row">
+                          		<div class="col-md-6">
+                          			<p><strong><i class="fa fa-user"></i> &nbsp; Nome</strong> <%= @user.name %></p>
+		                            <p><strong><i class="fa fa-file-o"></i> &nbsp; CPF</strong> <%= @user.cpf %></p>
+		                            <p><strong><i class="fa fa-users"></i> &nbsp; Filiação</strong> <%= @user.membership %></p>
+		                            <p><strong><i class="fa fa-file-o"></i> &nbsp; Registro Civil</strong> <%= @user.civil_registry %></p>		
+                          		</div>
+                          		<div class="col-md-6">
+                          			<p><strong><i class="fa fa-pin"></i> &nbsp; Endereço</strong> <%= @user.address %></p>
+                          			
+                          		</div>
+                          	</div>
+                            
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- morris.js -->
+    <script src="../vendors/raphael/raphael.min.js"></script>
+    <script src="../vendors/morris.js/morris.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+
+  </body>
+</html>
