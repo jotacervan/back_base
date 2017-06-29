@@ -31,7 +31,7 @@ class Webservices::QuestionsController < WebservicesController
 		q = Question.all
 
 		if !q.nil?
-			render :json => { :message => 'Nenhuma questão encontrada' }, :status => 401
+			render :json => { :message => 'Nenhuma questão encontrada' }, :status => 402
 		else
 			render :json => { :message => 'Questões carregadas com sucesso', :questions => q }
 		end
