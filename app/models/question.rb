@@ -3,4 +3,8 @@ class Question
   include Mongoid::Timestamps
   
   field :question, type: String
+
+  def self.mapsQuestion
+  	{ :question => self.question }
+  end
 end

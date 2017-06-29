@@ -13,7 +13,6 @@ class Webservices::QuestionsController < WebservicesController
   	{ 
   		:message => 'Questões carregadas com sucesso',
   		:questions => {
-  			:id => 192863tgv9146v4910y1b4,
   			:question => 'Qual é o nome do seu animal de estimação?',
   		} 
   	}"
@@ -33,7 +32,7 @@ class Webservices::QuestionsController < WebservicesController
 		if q.nil?
 			render :json => { :message => 'Nenhuma questão encontrada' }, :status => 402
 		else
-			render :json => { :message => 'Questões carregadas com sucesso', :questions => q }
+			render :json => { :message => 'Questões carregadas com sucesso', :questions => q.mapQuestion }
 		end
 	end
 end
