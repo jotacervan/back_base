@@ -181,7 +181,7 @@ class Webservices::LoginController < WebservicesController
 	def update_photos
 		u = User.find(params[:id]) rescue nil
 
-		if !u.nil?
+		if u.nil?
 			render :json => { :message => 'Usuario não encontrado no sistema' }, :status => 404
 		else
 			u.picture = params[:picture] 
@@ -237,7 +237,7 @@ class Webservices::LoginController < WebservicesController
 	def update_question
 		u = User.find(params[:id]) rescue nil
 
-		if !u.nil?
+		if u.nil?
 			render :json => { :message => 'Usuario não encontrado no sistema' }, :status => 404
 		else
 			u.security_question = params[:security_question]
