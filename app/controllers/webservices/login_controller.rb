@@ -129,7 +129,6 @@ class Webservices::LoginController < WebservicesController
 			u.status = 1
 			u.save(validate: false)
 			
-			sign_in u, :bypass => true
 			render :json => { :message => 'Cadastro Realizado com Sucesso', :user => User.mapuser(u) }
 		end
 	end
@@ -199,7 +198,7 @@ class Webservices::LoginController < WebservicesController
 	# =============================================================
 	# 					 UPDATE QUESTION METHOD
 	# =============================================================
-	api :POST, '/login/update_question', "Update Question From User"
+	api :POST, '/login/:', "Update Question From User"
   	formats ['json']
   	param :id, String, :desc => 'Ex: 1234123hb14b1234i12,
  ID é encontrado no json de retorno param[:user][:id]', :required => true, :missing_message => lambda { "id é requerido" }

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Torcidalegal</title>
+    <%= csrf_meta_tags %>
+    
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body <% if request.fullpath == '/users/sign_in' %> class="login" <% else %> class="nav-md" <% end %> >
+    <%= yield %>
+  </body>
+</html>

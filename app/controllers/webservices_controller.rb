@@ -1,6 +1,6 @@
 class WebservicesController < ApplicationController
 	skip_before_action :verify_authenticity_token	
-	before_action :check_login, except: [:signin, :signup, :signout]
+	before_action :check_login, except: [:signin, :signup, :update_question, :update_photos ]
 	
 	def check_login
 		if !user_signed_in?

@@ -86,6 +86,12 @@ class User
   # field :confirmation_sent_at, type: Time
   # field :unconfirmed_email,    type: String # Only if using reconfirmable
 
+  after_create :backlog
+
+  def backlog
+    Backlog.create(:description => self.name + ' se cadastrou no aplicativo')
+  end
+
   def self.mapuser (u)
     { :id => u.id.to_s, :name => u.name, :udid => u.udid, :status => u.status, :picture => u.picture, :doc_front => u.doc_front, :doc_back => u.doc_back, :membership => u.membership, :civil_registry => u.civil_registry, :cpf => u.cpf, :birthday => u.birthday, :marital_status => u.marital_status, :occupation => u.occupation, :address => u.address, :education_level => u.education_level, :accepted_terms => u.accepted_terms }
   end
