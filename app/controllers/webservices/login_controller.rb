@@ -30,7 +30,7 @@ class Webservices::LoginController < WebservicesController
   			:occupation => 'Pedreiro', 
   			:address => 'Rua Teste 34, Pinheiro, São Paulo - SP', 
   			:education_level => 'Bacharel', 
-  			:accepted_terms => true 
+  			:accepted_terms => true
   		} 
   	} "
   	example "Exemplo de retorno quando senha for incorreta
