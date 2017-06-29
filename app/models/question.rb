@@ -4,7 +4,11 @@ class Question
   
   field :question, type: String
 
-  def self.mapsQuestion
-  	{ :question => self.question }
+  def self.mapQuestions(q)
+  	arr = []
+  	q.each do |qu|
+  		arr <<  qu.question 
+  	end
+  	arr
   end
 end
