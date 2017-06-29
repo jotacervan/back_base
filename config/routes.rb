@@ -20,6 +20,10 @@ Rails.application.routes.draw do
 	post '/login/update_photos'
 	post '/login/update_question'
 
+	# ===========================
+  	# 	   QUESTION METHODS 
+  	# ===========================
+  	get '/questions/getQuestions'
   end
 
  
