@@ -46,7 +46,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Usuários do App <small>Usuário</small></h2>
+                    <h2>Times Cadastrados<small>Time</small></h2>
                     
                     <div class="clearfix"></div>
                   </div>
@@ -56,36 +56,12 @@
                       <thead>
                         <tr>
                           <th>Name</th>
-                          <th>Filiação</th>
-                          <th>CPF</th>
-                          <th>Profissão</th>
-                          <th>Aniversário</th>
+                          <th>Thumb</th>
                           <th>Opções</th>
                         </tr>
                       </thead>
                       <tbody>
-                      	<% @users.each do |u| %>
-                        <tr>
-                          <td><%= u.name %></td>
-                          <td><%= u.membership %></td>
-                          <td><%= u.cpf %></td>
-                          <td><%= u.occupation %></td>
-                          <td><%= u.birthday %></td>
-                          <td>
-                          	  <div class="btn-group">
-		                          <button type="button" class="btn btn-default">Opções</button>
-		                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-		                            <span class="caret"></span>
-		                            <span class="sr-only">Toggle Dropdown</span>
-		                          </button>
-		                          <ul class="dropdown-menu" role="menu">
-		                              <li><a href="<%= user_path(u.id) %>"><i class="fa fa-eye"></i> Ver Usuário</a></li>
-		                              <li><a href="<%= user_path(u.id) %>" data-confirm="Tem certeza que deseja deletar o usuário <%= u.name %>?" data-method="delete" rel="nofollow"><i class="fa fa-trash"></i> Deletar Usuário</a></li>
-		                          </ul>
-		                      </div>
-                          </td>
-                        </tr>
-                        <% end %>
+                      	
                       </tbody>
                     </table>
                   </div>

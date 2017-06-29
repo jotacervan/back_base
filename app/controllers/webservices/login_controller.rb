@@ -1,7 +1,7 @@
 class Webservices::LoginController < WebservicesController
 	
 	# =============================================================
-	# 					       SIGNIN METHOD
+	# 					             SIGNIN METHOD
 	# =============================================================
 	api :POST, '/login/signin', "User sign in"
   	formats ['json']
@@ -60,21 +60,16 @@ class Webservices::LoginController < WebservicesController
 
 
 	# =============================================================
-	# 					       SIGNUP METHOD
+	# 					               SIGNUP METHOD
 	# =============================================================
 	api :POST, '/login/signup', "User sign up"
   	formats ['json']
   	param :name, String, :desc => 'Ex: Fulano de Tal', :required => true, :missing_message => lambda { "Nome é requerido" }
+    param :email, String, :desc => 'Ex: email@gmail.com', :required => true, :missing_message => lambda { "Email é requerido" }
   	param :password, String, :desc => 'Senha', :required => true, :missing_message => lambda { "Senha é requerido" }
   	param :udid, String, :desc => 'UDID', :required => true, :missing_message => lambda { "UDID é requerido" }
-  	param :membership, String, :desc => 'Filiação'
-  	param :civil_registry, String, :desc => 'Registro Civil'
+    param :torcida_id, String, :desc => 'ID da Torcida', :required => true, :missing_message => lambda { 'ID da torcida é requerido' }
   	param :cpf, String, :desc => 'Ex: 999.999.999-99', :required => true, :missing_message => lambda { "CPF requerido" }
-  	param :birthday, String, :desc => 'Ex: 05/04/1980'
-  	param :marital_status, String, :desc => 'Ex: Casado, Solteiro, Divorciado, Viuvo'
-  	param :occupation, String, :desc => 'Ex: Pedreiro'
-  	param :address, String, :desc => 'Ex: Rua Janio 45, bloco A, São Paulo - SP'
-  	param :education_level, String, :desc => 'Escolaridade'
   	param :accepted_terms, Boolean, :desc => 'Ex: true, false', :required => true, :missing_message => lambda { "Aceite os termos" }
   	error 403, "CPF já cadastrado em nosso sistema"
   	error 500, "Erro desconhecido"
@@ -89,8 +84,8 @@ class Webservices::LoginController < WebservicesController
   	  		:status => 1,
   	  		:membership => '82736482',
   	  		:picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
-  			:doc_front => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
-  			:doc_back => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+  			  :doc_front => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+  			  :doc_back => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
   	  		:civil_registry => '123123', 
   	  		:cpf => '999.999.999-99', 
   	  		:birthday => '99/99/1999', 
@@ -98,9 +93,9 @@ class Webservices::LoginController < WebservicesController
   	  		:occupation => 'Pedreiro',
   	  		:address => 'Rua Teste 34, Pinheiro, São Paulo - SP', 
   	  		:education_level => 'Bacharel', 
-  	  		:accepted_terms => true 
+  	  		:accepted_terms => true
   	  	}
-  	} "
+  	}"
   	example "Exemplo de retorno quando CPF já tiver cadastro 
 
   	{ 
@@ -114,18 +109,12 @@ class Webservices::LoginController < WebservicesController
 		else
 			u = User.new()
 			u.name = params[:name] 
-			u.membership = params[:membership]  
-			u.civil_registry = params[:civil_registry] 
-			u.cpf = params[:cpf] 
-			u.birthday = params[:birthday]
-			u.marital_status = params[:marital_status]
-			u.occupation = params[:occupation]
-			u.address = params[:address]
-			u.education_level = params[:education_level]
-			u.accepted_terms = params[:accepted_terms]
+			u.email = params[:email]
+			u.cpf = params[:cpf]
 			u.password = params[:password]
 			u.password_confirmation = params[:password]
 			u.udid = params[:udid]
+      u.torcida_id = params[:torcida_id]
 			u.status = 1
 			u.save(validate: false)
 			
@@ -135,7 +124,7 @@ class Webservices::LoginController < WebservicesController
 
 
 	# =============================================================
-	# 					 UPDATE PHOTOS METHOD
+	# 					          UPDATE PHOTOS METHOD
 	# =============================================================
 	api :POST, '/login/update_photos', "Update Photos From User"
   	formats ['json']
@@ -196,7 +185,7 @@ class Webservices::LoginController < WebservicesController
 
 
 	# =============================================================
-	# 					 UPDATE QUESTION METHOD
+	# 					         UPDATE QUESTION METHOD
 	# =============================================================
 	api :POST, '/login/update_question', "Update Question From User"
   	formats ['json']

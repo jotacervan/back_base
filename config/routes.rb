@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   # ===========================
   # 	  ROOT DEFINITION
   # ===========================
@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   apipie
 
   resources :users
+  resources :clubes
+  resources :torcidas
   
   # ===========================
   # 	    WEBSERVICES

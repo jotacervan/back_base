@@ -87,7 +87,8 @@ class User
   # field :unconfirmed_email,    type: String # Only if using reconfirmable
 
   after_create :backlog
-  
+  belongs_to :torcida, optional: true
+
   def backlog
     Backlog.create(:description => self.name + ' realizou o cadastrou no aplicativo')
   end
