@@ -14,6 +14,13 @@ class ClubesController < ApplicationController
   end
 
   def create
+    @clube = Clube.new(clube_params)
+
+    if @clube.save
+      render json: { :message => 'Sucesso' }
+    else
+      render json: { :message => 'Erro' }
+    end
   end
 
   def update
@@ -21,4 +28,9 @@ class ClubesController < ApplicationController
 
   def destroy
   end
+
+  private
+    def clube_params
+      params.require(:clube).permit(:name,:picture)
+    end
 end

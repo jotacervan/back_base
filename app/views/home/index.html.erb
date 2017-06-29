@@ -89,7 +89,7 @@
                   <div class="dashboard-widget-content">
 
                     <ul class="list-unstyled timeline widget">
-                      <% @backlog.each do |b| %>
+                      <% @backlog.take(10).each do |b| %>
                       <li>
                         <div class="block">
                           <div class="block_content">
@@ -131,9 +131,9 @@
                       </div>
                       <div class="col-xs-12 bottom text-center">
                         <div class="col-xs-12 text-right col-sm-6 col-sm-offset-6 emphasis">
-                          <button type="button" class="btn btn-primary btn-xs">
+                          <a href="<%= user_path(u.id) %>" type="button" class="btn btn-primary btn-xs">
                             <i class="fa fa-user"> </i> Visualizar
-                          </button>
+                          </a>
                         </div>
                       </div>
                     </div>

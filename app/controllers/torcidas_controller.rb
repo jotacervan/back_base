@@ -3,8 +3,9 @@ class TorcidasController < ApplicationController
   end
 
   def new
+    @torcida = Torcida.new
   end
-
+  
   def edit
   end
 
