@@ -8,7 +8,6 @@ class Clube
   field :picture_file_size, type: String
   field :picture_content_type, type: String
 
-
   has_many :torcidas, dependent: :destroy
 
   has_mongoid_attached_file :picture, 
@@ -20,4 +19,13 @@ class Clube
     :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
   validates_attachment_size :picture, :less_than => 5.megabytes
   validates_attachment_content_type :picture, :content_type => ['image/jpeg', 'image/png', 'image/jpg']
+
+  
+  def self.mapClube(c)
+    arr = []
+    c.each do |cu|
+      arr <<  { :id => cu.id, :name => cu.name, :picture => cu.picture }
+    end
+    arr
+  end
 end

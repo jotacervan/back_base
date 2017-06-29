@@ -4,6 +4,7 @@ class ClubesController < ApplicationController
   end
 
   def new
+    @clube = Clube.new
   end
 
   def edit

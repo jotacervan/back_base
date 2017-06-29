@@ -10,7 +10,7 @@ class Torcida
 
   belongs_to :clube
   has_many :users
-
+  
   has_mongoid_attached_file :picture, 
     :styles => { :medium => "320x320>", :thumb => "160x160#" },
     :storage        => :s3,
@@ -20,4 +20,13 @@ class Torcida
     :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
   validates_attachment_size :picture, :less_than => 5.megabytes
   validates_attachment_content_type :picture, :content_type => ['image/jpeg', 'image/png', 'image/jpg']
+
+  def self.mapTorcida(c)
+    arr = []
+    c.each do |cu|
+      arr <<  { :id => cu.id, :name => cu.name, :picture => cu.picture }
+    end
+    arr
+  end
+
 end

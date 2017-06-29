@@ -19,15 +19,25 @@ Rails.application.routes.draw do
   	# ===========================
   	# 	     LOGIN METHODS 
   	# ===========================
-	post '/login/signin'
-	post '/login/signup'
-	post '/login/update_photos'
-	post '/login/update_question'
+  	post '/login/signin'
+  	post '/login/signup'
+  	post '/login/update_photos'
+  	post '/login/update_question'
 
-	# ===========================
+	  # ===========================
   	# 	   QUESTION METHODS 
   	# ===========================
   	get '/questions/getQuestions'
+
+    # ===========================
+    #      TIME METHODS
+    # ===========================
+    get '/times/getTimes'
+
+    # ===========================
+    #      TORCIDAS METHODS 
+    # ===========================
+    get '/torcidas/getTorcidas'
   end
 
  
