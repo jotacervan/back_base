@@ -23,5 +23,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id]) rescue nil
+
+    if @user.nil?
+      @user.destroy
+      redirect_to users_path
+    else
+      redirect_to users_path, alert: 'Erro ao deletar usuário'
+    end
   end
 end

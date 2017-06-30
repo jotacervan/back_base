@@ -59,7 +59,7 @@
                           <th>Filiação</th>
                           <th>CPF</th>
                           <th>Profissão</th>
-                          <th>Aniversário</th>
+                          <th>Status Cadastro</th>
                           <th>Opções</th>
                         </tr>
                       </thead>
@@ -70,7 +70,7 @@
                           <td><%= u.membership %></td>
                           <td><%= u.cpf %></td>
                           <td><%= u.occupation %></td>
-                          <td><%= u.birthday %></td>
+                          <td><% if u.status == 1 %>20%<% elsif u.status == 2 %>40%<% elsif u.status == 3 %>60%<% elsif u.status == 4 %>80%<% elsif u.status == 5 %>OK<% end %></td>
                           <td>
                           	  <div class="btn-group">
 		                          <button type="button" class="btn btn-default">Opções</button>

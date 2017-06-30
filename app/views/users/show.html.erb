@@ -92,18 +92,20 @@
 
                             <!-- start recent activity -->
                             <ul class="messages">
+                              <% @user.backlogs.each do |b| %>
                               <li>
                                 <img src="<%= @user.picture.url(:thumb) %>" class="avatar" alt="Avatar">
                                 <div class="message_date">
-                                  <h3 class="date text-info"><%= @user.created_at.strftime('%d') %></h3>
-                                  <p class="month"><%= @user.created_at.strftime('%h') %></p>
+                                  <h3 class="date text-info"><%= b.created_at.strftime('%d') %></h3>
+                                  <p class="month"><%= b.created_at.strftime('%h') %></p>
                                 </div>
                                 <div class="message_wrapper">
-                                  <h4 class="heading">Cadastro Realizado</h4>
-                                  <blockquote class="message"><%= @user.name %> se cadastrou no sistema</blockquote>
+                                  <h4 class="heading"><%= b.user.name %></h4>
+                                  <blockquote class="message"><%= b.description %></blockquote>
                                   <br />
                                 </div>
                               </li>
+                              <% end %>
                             </ul>
                             <!-- end recent activity -->
                             
@@ -111,15 +113,82 @@
                           
                           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
                           	<div class="row">
-                          		<div class="col-md-6">
-                          			<p><strong><i class="fa fa-user"></i> &nbsp; Nome</strong> <%= @user.name %></p>
-		                            <p><strong><i class="fa fa-file-o"></i> &nbsp; CPF</strong> <%= @user.cpf %></p>
-		                            <p><strong><i class="fa fa-users"></i> &nbsp; Filiação</strong> <%= @user.membership %></p>
-		                            <p><strong><i class="fa fa-file-o"></i> &nbsp; Registro Civil</strong> <%= @user.civil_registry %></p>		
-                          		</div>
-                          		<div class="col-md-6">
-                          			<p><strong><i class="fa fa-pin"></i> &nbsp; Endereço</strong> <%= @user.address %></p>
+                          		<div class="col-md-6" style="font-size:16px">
+                                <div class="form-group">
+                                  <label class="control-label col-md-4 col-sm-4 col-xs-12"> <i class="fa fa-user"></i> &nbsp; Nome</label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <%= @user.name %>
+                                  </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                  <label class="control-label col-md-4 col-sm-4 col-xs-12"> <i class="fa fa-file-text-o"></i> &nbsp; CPF</label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <%= @user.cpf %>
+                                  </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                  <label class="control-label col-md-4 col-sm-4 col-xs-12"> <i class="fa fa-users"></i> &nbsp; Filiação</label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <%= @user.membership %>
+                                  </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                  <label class="control-label col-md-4 col-sm-4 col-xs-12"> <i class="fa fa-file-pdf-o"></i> &nbsp; Registro Civil</label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <%= @user.civil_registry %>
+                                  </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                
                           			
+                          		</div>
+                          		<div class="col-md-6" style="font-size:16px">
+                          			<div class="form-group">
+                                  <label class="control-label col-md-4 col-sm-4 col-xs-12"> <i class="fa fa-map-marker"></i> &nbsp; CEP</label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <%= @user.cep %>
+                                  </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                  <label class="control-label col-md-4 col-sm-4 col-xs-12"> <i class="fa fa-map-marker"></i> &nbsp; Estado</label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <%= @user.state %>
+                                  </div>
+                                </div>
+                                <div class="clearfix"></div>
+                          			<div class="form-group">
+                                  <label class="control-label col-md-4 col-sm-4 col-xs-12"> <i class="fa fa-map-marker"></i> &nbsp; Cidade</label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <%= @user.city %>
+                                  </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                  <label class="control-label col-md-4 col-sm-4 col-xs-12"> <i class="fa fa-map-marker"></i> &nbsp; Bairro</label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <%= @user.neighborhood %>
+                                  </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                  <label class="control-label col-md-4 col-sm-4 col-xs-12"> <i class="fa fa-map-marker"></i> &nbsp; Rua</label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <%= @user.street %>
+                                  </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                  <label class="control-label col-md-4 col-sm-4 col-xs-12"> <i class="fa fa-map-marker"></i> &nbsp; Nº e Compl</label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <%= @user.number %> <%= @user.complement %>
+                                  </div>
+                                </div>
+                                <div class="clearfix"></div>
+
                           		</div>
                           	</div>
                             

@@ -92,13 +92,13 @@ class User
   # field :confirmed_at,         type: Time
   # field :confirmation_sent_at, type: Time
   # field :unconfirmed_email,    type: String # Only if using reconfirmable
-
+  
   after_create :backlog
   belongs_to :torcida, optional: true
   has_many :backlogs, dependent: :destroy
-
+  
   def backlog
-    Backlog.create(:description => self.name + ' realizou o cadastrou no aplicativo')
+    Backlog.create(:description => self.name + ' realizou o cadastrou no aplicativo', :user_id => self.id)
   end
 
   def self.mapuser (u)

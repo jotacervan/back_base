@@ -68,27 +68,13 @@
               <div class="x_panel">
                 <div class="x_title">
                   <h2>Atividades Recentes <small>Geral</small></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                   <div class="dashboard-widget-content">
 
                     <ul class="list-unstyled timeline widget">
+                    
                       <% @backlog.take(10).each do |b| %>
                       <li>
                         <div class="block">
@@ -103,6 +89,7 @@
                         </div>
                       </li>
                       <% end %>
+                      
                     </ul>
                   </div>
                 </div>
@@ -110,37 +97,42 @@
             </div>
 
             <div class="col-md-8 col-sm-8 col-xs-12">
-              <h4>Ultimos Usuários Cadastrados</h4>
-              <hr>
-              <div class="row">
-                <% @users.order(created_at: :desc).take(4).each do |u| %>
-                  <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
-                    <div class="well profile_view">
-                      <div class="col-sm-12">
-                        <h4 class="brief"><i><%= u.occupation %></i></h4>
-                        <div class="left col-xs-7">
-                          <h2><%= u.name %></h2>
-                          <ul class="list-unstyled">
-                            <li><i class="fa fa-building"></i> Filiação: <%= u.membership %> </li>
-                            <li><i class="fa fa-file-o"></i> CPF: <%= u.cpf %> </li>
-                          </ul>
-                        </div>
-                        <div class="right col-xs-5 text-center">
-                          <img src="<%= u.picture.url(:thumb) %>" alt="" class="img-circle img-responsive">
+              <div class="x_panel">
+                <div class="x_title">
+                <h4>Ultimos Usuários Cadastrados</h4>
+                </div>
+                <div class="x_content">
+                  <div class="row">
+                    <% @users.order(created_at: :desc).take(4).each do |u| %>
+                      <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
+                        <div class="well profile_view">
+                          <div class="col-sm-12">
+                            <h4 class="brief"><i><%= u.occupation %></i></h4>
+                            <div class="left col-xs-7">
+                              <h2><%= u.name %></h2>
+                              <ul class="list-unstyled">
+                                <li><i class="fa fa-building"></i> Filiação: <%= u.membership %> </li>
+                                <li><i class="fa fa-file-text-o"></i> CPF: <%= u.cpf %> </li>
+                                <li><i class="fa fa-hourglass"></i> Status Cadastro: <% if u.status == 1 %>20%<% elsif u.status == 2 %>40%<% elsif u.status == 3 %>60%<% elsif u.status == 4 %>80%<% elsif u.status == 5 %>OK<% end %> </li>
+                              </ul>
+                            </div>
+                            <div class="right col-xs-5 text-center">
+                              <img src="<%= u.picture.url(:thumb) %>" alt="" class="img-circle img-responsive">
+                            </div>
+                          </div>
+                          <div class="col-xs-12 bottom text-center">
+                            <div class="col-xs-12 text-right col-sm-6 col-sm-offset-6 emphasis">
+                              <a href="<%= user_path(u.id) %>" type="button" class="btn btn-primary btn-xs">
+                                <i class="fa fa-user"> </i> Visualizar
+                              </a>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div class="col-xs-12 bottom text-center">
-                        <div class="col-xs-12 text-right col-sm-6 col-sm-offset-6 emphasis">
-                          <a href="<%= user_path(u.id) %>" type="button" class="btn btn-primary btn-xs">
-                            <i class="fa fa-user"> </i> Visualizar
-                          </a>
-                        </div>
-                      </div>
-                    </div>
+                    <% end %>
                   </div>
-                <% end %>
-              </div>
-                    
+                  </div>
+                </div>
             </div>
           </div>
         </div>
