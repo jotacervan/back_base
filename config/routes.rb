@@ -23,11 +23,12 @@ Rails.application.routes.draw do
   	post '/login/signup'
   	post '/login/update_photos'
   	post '/login/update_question'
+    get  '/login/getAbout'
 
 	  # ===========================
   	# 	   QUESTION METHODS 
   	# ===========================
-  	get '/questions/getQuestions'
+  	get '/questions/getQuestion'
 
     # ===========================
     #      TIME METHODS

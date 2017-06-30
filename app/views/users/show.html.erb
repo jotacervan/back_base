@@ -82,7 +82,9 @@
                         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                           <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Atividades Recentes</a>
                           </li>
-                          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Perfil</a>
+                          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Informações</a>
+                          </li>
+                          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Documento</a>
                           </li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
@@ -104,10 +106,10 @@
                               </li>
                             </ul>
                             <!-- end recent activity -->
-
+                            
                           </div>
                           
-                          <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                          <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
                           	<div class="row">
                           		<div class="col-md-6">
                           			<p><strong><i class="fa fa-user"></i> &nbsp; Nome</strong> <%= @user.name %></p>
@@ -123,6 +125,22 @@
                             
                             
                           </div>
+
+                          <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <h4 class="text-center">Documento Frente</h4>
+                                <img src="<%= @user.doc_front %>" style="width:100%" alt="<%= @user.name %>" title="<%= @user.name %>" >
+                              </div>
+                              <div class="col-md-6">
+                                <h4 class="text-center">Documento Verso</h4>
+                                <img src="<%= @user.doc_back %>" style="width:100%" alt="<%= @user.name %>" title="<%= @user.name %>" >
+                              </div>
+                            </div>
+                            
+                            
+                          </div>
+
                         </div>
                       </div>
                     </div>

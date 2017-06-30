@@ -88,6 +88,7 @@ class User
 
   after_create :backlog
   belongs_to :torcida, optional: true
+  has_many :backlogs, dependent: :destroy
 
   def backlog
     Backlog.create(:description => self.name + ' realizou o cadastrou no aplicativo')
