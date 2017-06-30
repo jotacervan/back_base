@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   	post '/login/update_photos'
   	post '/login/update_question'
     post '/login/update_address'
+    post '/login/complete_login'
 
     # ===========================
     #        LOGIN METHODS 
