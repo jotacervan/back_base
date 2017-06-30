@@ -26,7 +26,13 @@ class Webservices::AccountController < WebservicesController
 	    :birthday => '99/99/1999', 
 	    :marital_status => 'Casado', 
 	    :occupation => 'Pedreiro', 
-	    :address => 'Rua Teste 34, Pinheiro, São Paulo - SP', 
+	    :cep => '13413-324', 
+        :state => 'SP',
+        :city => 'São Paulo',
+        :neighborhood => 'Pinheiros',
+        :street => 'Rua teste',
+        :number => '123',
+        :complement => 'apto 20',
 	    :education_level => 'Bacharel', 
 	    :accepted_terms => true
 	  }
