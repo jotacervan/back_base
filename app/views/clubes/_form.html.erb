@@ -1,0 +1,7 @@
+<%= form_for @clube do |f| %>
+	<%= f.label :nome %>
+	<%= f.text_field :name, :class => "form-control", :placeholder => 'Nome do Time' %><br>
+	<%= f.label :logo %>
+	<%= f.file_field :picture, :class => "form-control" %><br>
+	<%= f.submit({:class => 'btn btn-success'}) %>
+<% end %>

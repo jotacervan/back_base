@@ -106,7 +106,7 @@ class User
   end
 
   def self.mapuser (u)
-    { :id => u.id.to_s, :name => u.name, :udid => u.udid, :status => u.status, :status_message => u.status_message, :picture => u.picture, :doc_front => u.doc_front, :doc_back => u.doc_back, :membership => u.membership, :civil_registry => u.civil_registry, :cpf => u.cpf, :birthday => u.birthday, :marital_status => u.marital_status, :occupation => u.occupation, :cep => u.cep, :state => u.state, :city => u.city, :neighborhood => u.neighborhood, :street => u.street, :number => u.number, :complement => u.complement, :education_level => u.education_level, :accepted_terms => u.accepted_terms, :time_logo => u.torcida.time.picture, :torcida_logo => u.torcida.picture, :payment => u.payment }
+    { :id => u.id.to_s, :name => u.name, :udid => u.udid, :status => u.status, :status_message => u.status_message, :picture => u.picture, :doc_front => u.doc_front, :doc_back => u.doc_back, :membership => u.membership, :civil_registry => u.civil_registry, :cpf => u.cpf, :birthday => u.birthday, :marital_status => u.marital_status, :occupation => u.occupation, :cep => u.cep, :state => u.state, :city => u.city, :neighborhood => u.neighborhood, :street => u.street, :number => u.number, :complement => u.complement, :education_level => u.education_level, :accepted_terms => u.accepted_terms, :time_logo => u.torcida.clube.picture, :torcida_logo => u.torcida.picture, :payment => u.payment }
   end
 
 
