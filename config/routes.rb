@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   	# 	   QUESTION METHODS 
   	# ===========================
   	get '/questions/getQuestion'
-
+    
     # ===========================
     #      TIME METHODS
     # ===========================
