@@ -194,7 +194,7 @@ class Webservices::LoginController < WebservicesController
 			u.picture = params[:picture] 
 			u.doc_front = params[:doc_front]
 			u.doc_back = params[:doc_back]
-			u.status = 2
+			u.status = 4
 			u.save(validate: false)
 			
 			render :json => { :message => 'Fotos inseridas com sucesso', :user => User.mapuser(u) }
@@ -255,7 +255,7 @@ class Webservices::LoginController < WebservicesController
 		else
 			u.security_question = params[:security_question]
 			u.security_answer = params[:security_answer]
-			u.status = 3
+			u.status = 5
 			u.save(validate: false)
 			
 			render :json => { :message => 'Questão inserida com sucesso', :user => User.mapuser(u) }
@@ -330,6 +330,76 @@ class Webservices::LoginController < WebservicesController
         u.save(validate: false)
         
         render :json => { :message => 'Endereço inserido com sucesso', :user => User.mapuser(u) }
+      end
+    end
+
+
+    # =============================================================
+    #                    COMPLETE LOGIN METHOD
+    # =============================================================
+    api :POST, '/login/complete_login', "Complete Login"
+    formats ['json']
+    param :id, String, :desc => 'Ex: 1234123hb14b1234i12,
+ ID é encontrado no json de retorno param[:user][:id]', :required => true, :missing_message => lambda { "id é requerido" }
+    param :membership, String, :desc => 'Filiação', :required => true, :missing_message => lambda { "Filiação é requerido" }
+    param :civil_registry, String, :desc => 'Registro Civil', :required => true, :missing_message => lambda { "Registro Civil é requerido" }
+    param :birthday, String, :desc => 'Aniversãrio dd/mm/YYYY', :required => false
+    param :marital_status, String, :desc => 'Estado Civil', :required => false
+    param :occupation, String, :desc => 'Profissão', :required => false
+    param :education_level, String, :desc => 'Escolaridade', :required => false
+
+    error 404, "Usuario não encontrado no sistema"
+    error 500, "Erro desconhecido"
+    example "Exemplo de retorno quando dados forem inseridos com sucesso 
+      
+    { 
+      :message => 'Dados inseridos com sucesso',
+        :user => { 
+          :id => 192863tgv9146v4910y1b4,
+          :name => 'Fulano de Tal',
+          :udid => 123123,
+          :status => 1,
+          :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
+          :doc_front => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
+          :doc_back => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
+          :membership => '82736482',
+          :civil_registry => '123123',
+          :cpf => '999.999.999-99',
+          :birthday => '99/99/1999',
+          :marital_status => 'Casado', 
+          :occupation => 'Pedreiro',
+          :cep => '13413-324', 
+          :state => 'SP',
+          :city => 'São Paulo',
+          :neighborhood => 'Pinheiros',
+          :street => 'Rua teste',
+          :number => '123',
+          :complement => 'apto 20',
+          :education_level => 'Bacharel',
+          :accepted_terms => true
+        }
+    }"
+    example "Exemplo de retorno quando usuario não for encontrado 
+
+    { 
+      :message => 'Usuario não encontrado no sistema'
+    }"
+    def complete_login
+      u = User.find(params[:id]) rescue nil
+
+      if u.nil?
+        render :json => { :message => 'Usuario não encontrado no sistema' }, :status => 404
+      else
+        u.membership = params[:membership].nil? ? '' : params[:membership]
+        u.civil_registry = params[:civil_registry].nil? ? '' : params[:civil_registry]
+        u.birthday = params[:birthday].nil? ? '' : params[:birthday]
+        u.marital_status = params[:marital_status].nil? ? '' : params[:marital_status]
+        u.occupation = params[:occupation].nil? ? '' : params[:occupation]
+        u.education_level = params[:education_level].nil? ? '' : params[:education_level]
+        u.status = 2
+        u.save(validate: false)
+        
+        render :json => { :message => 'Dados inserido com sucesso', :user => User.mapuser(u) }
       end
     end
 

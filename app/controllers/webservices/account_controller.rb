@@ -25,7 +25,7 @@ class Webservices::AccountController < WebservicesController
 	    :cpf => '999.999.999-99', 
 	    :birthday => '99/99/1999', 
 	    :marital_status => 'Casado', 
-	    :occupation => 'Pedreiro', 
+	    :occupation => 'Pedreiro',
 	    :cep => '13413-324', 
         :state => 'SP',
         :city => 'São Paulo',
