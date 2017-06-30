@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
 
     if @question.save
-      redirect_to @question
+      redirect_to edit_question_path(@question.id)
     else
       render 'new'
     end
@@ -29,7 +29,7 @@ class QuestionsController < ApplicationController
       redirect_to questions_path
     else
       @question.destroy
-      redirect_to questions_params
+      redirect_to questions_path
     end
   end
 
@@ -41,7 +41,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
 
     if @question.update(question_params)
-      redirect_to @question
+      redirect_to edit_question_path(@question.id)
     else
       render 'edit'
     end

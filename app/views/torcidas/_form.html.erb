@@ -1,0 +1,13 @@
+<%= form_for @torcida do |f| %>
+	<%= f.label :nome %>
+	<%= f.text_field :name, :class => 'form-control', :placeholder => 'Nome da Torcida' %><br>
+	<%= f.label :logo %>
+	<%= f.file_field :picture, :class => 'form-control', :placeholder => 'Logo' %><br>
+	<%= f.label :time %>
+	<%= f.select(:clube_id, {},{},{:class => 'form-control'}) do %>
+		<% @clubes.each do |c| %>
+			<%= content_tag(:option, c.name, value: c.id) %>
+		<% end %>
+	<% end %><br>
+	<%= f.submit({:class => 'btn btn-success'}) %>
+<% end %>

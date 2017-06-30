@@ -1,0 +1,5 @@
+<%= form_for @question do |f| %>
+	<%= f.label :pergunta %>
+	<%= f.text_field :question, :class => 'form-control', :placeholder => 'Pergunta' %><br>
+	<%= f.submit({:class => 'btn btn-success'}) %>
+<% end %>

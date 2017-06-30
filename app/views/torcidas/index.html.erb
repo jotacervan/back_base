@@ -75,8 +75,8 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                               </button>
                               <ul class="dropdown-menu" role="menu">
-                                  <li><a href="<%= clube_path(u.id) %>"><i class="fa fa-pencil"></i> Editar Torcida</a></li>
-                                  <li><a href="<%= clube_path(u.id) %>" data-confirm="Tem certeza que deseja deletar a Torcida <%= u.name %>?" data-method="delete" rel="nofollow"><i class="fa fa-trash"></i> Deletar Time</a></li>
+                                  <li><a href="<%= edit_torcida_path(u.id) %>"><i class="fa fa-pencil"></i> Editar Torcida</a></li>
+                                  <li><a href="<%= torcida_path(u.id) %>" data-confirm="Tem certeza que deseja deletar a Torcida <%= u.name %>?" data-method="delete" rel="nofollow"><i class="fa fa-trash"></i> Deletar Time</a></li>
                               </ul>
                           </div>
                           </td>

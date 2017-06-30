@@ -53,7 +53,7 @@ class User
   field :doc_back_content_type, type: String
   field :user_type, type: String, default: 'User'
   field :status, type: Integer, default: 0
-  field :status_message, type: String, default: 'OK'
+  field :status_message, type: String, default: 'Aguardando aprovação da torcida.'
   field :udid, type: String
   field :security_question, type: String
   field :security_answer, type: String
@@ -106,7 +106,7 @@ class User
   end
 
   def self.mapuser (u)
-    { :id => u.id.to_s, :name => u.name, :udid => u.udid, :status => u.status, :status_message => u.status_message, :picture => u.picture, :doc_front => u.doc_front, :doc_back => u.doc_back, :membership => u.membership, :civil_registry => u.civil_registry, :cpf => u.cpf, :birthday => u.birthday, :marital_status => u.marital_status, :occupation => u.occupation, :cep => u.cep, :state => u.state, :city => u.city, :neighborhood => u.neighborhood, :street => u.street, :number => u.number, :complement => u.complement, :education_level => u.education_level, :accepted_terms => u.accepted_terms, :time_name => u.torcida.clube.name, :time_logo => u.torcida.clube.picture, :torcida_name => u.torcida.name, :torcida_logo => u.torcida.picture, :payment => u.payment }
+    { :id => u.id.to_s, :name => u.name, :udid => u.udid, :status => u.status, :status_message => u.status_message, :picture => u.picture, :doc_front => u.doc_front, :doc_back => u.doc_back, :membership => u.membership, :civil_registry => u.civil_registry, :cpf => u.cpf, :birthday => u.birthday, :marital_status => u.marital_status, :occupation => u.occupation, :cep => u.cep, :state => u.state, :city => u.city, :neighborhood => u.neighborhood, :street => u.street, :number => u.number, :complement => u.complement, :education_level => u.education_level, :accepted_terms => u.accepted_terms, :time_name => u.torcida.clube.name, :time_logo => u.torcida.clube.picture, :torcida_name => u.torcida.name, :torcida_logo => u.torcida.picture, :payment => u.payment, :approved_torcida => u.approved_torcida , :approved_time => u.approved_time }
   end
 
 

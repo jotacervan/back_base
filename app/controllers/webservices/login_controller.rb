@@ -43,6 +43,8 @@ class Webservices::LoginController < WebservicesController
         :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
   			:accepted_terms => true,
         :payment => true,
+        :approved_torcida => true, 
+        :approved_time => true
   		} 
   	} "
   	example "Exemplo de retorno quando senha for incorreta
@@ -117,7 +119,9 @@ class Webservices::LoginController < WebservicesController
           :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
           :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
   	  		:accepted_terms => true
-          :payment => true
+          :payment => true,
+          :approved_torcida => true, 
+          :approved_time => true
   	  	}
   	}"
   	example "Exemplo de retorno quando CPF já tiver cadastro 
@@ -195,7 +199,9 @@ class Webservices::LoginController < WebservicesController
           :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
           :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
   	  		:accepted_terms => true ,
-          :payment => true
+          :payment => true,
+          :approved_torcida => true, 
+          :approved_time => true
   	  	}
   	} "
   	example "Exemplo de retorno quando usuario não for encontrado 
@@ -263,7 +269,9 @@ class Webservices::LoginController < WebservicesController
           :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
           :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
   	  		:accepted_terms => true,
-          :payment => true
+          :payment => true,
+          :approved_torcida => true, 
+          :approved_time => true
   	  	}
   	}"
   	example "Exemplo de retorno quando usuario não for encontrado 
@@ -335,7 +343,9 @@ class Webservices::LoginController < WebservicesController
           :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
           :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
           :accepted_terms => true,
-          :payment => true
+          :payment => true,
+          :approved_torcida => true, 
+          :approved_time => true
         }
     }"
     example "Exemplo de retorno quando usuario não for encontrado 
@@ -412,7 +422,9 @@ class Webservices::LoginController < WebservicesController
           :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
           :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
           :accepted_terms => true,
-          :payment => true
+          :payment => true,
+          :approved_torcida => true, 
+          :approved_time => true
         }
     }"
     example "Exemplo de retorno quando usuario não for encontrado 
@@ -481,7 +493,9 @@ class Webservices::LoginController < WebservicesController
           :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
           :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
           :accepted_terms => true,
-          :payment => true
+          :payment => true,
+          :approved_torcida => true, 
+          :approved_time => true
         }
     }"
     example "Exemplo de retorno quando usuario não for encontrado 
