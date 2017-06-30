@@ -53,6 +53,7 @@ class User
   field :doc_back_content_type, type: String
   field :user_type, type: String, default: 'User'
   field :status, type: Integer, default: 0
+  field :status_message, type: String, default: 'OK'
   field :udid, type: String
   field :security_question, type: String
   field :security_answer, type: String
@@ -92,7 +93,7 @@ class User
   # field :confirmed_at,         type: Time
   # field :confirmation_sent_at, type: Time
   # field :unconfirmed_email,    type: String # Only if using reconfirmable
-  
+
   after_create :backlog
   belongs_to :torcida, optional: true
   has_many :backlogs, dependent: :destroy
@@ -102,7 +103,7 @@ class User
   end
 
   def self.mapuser (u)
-    { :id => u.id.to_s, :name => u.name, :udid => u.udid, :status => u.status, :picture => u.picture, :doc_front => u.doc_front, :doc_back => u.doc_back, :membership => u.membership, :civil_registry => u.civil_registry, :cpf => u.cpf, :birthday => u.birthday, :marital_status => u.marital_status, :occupation => u.occupation, :cep => u.cep, :state => u.state, :city => u.city, :neighborhood => u.neighborhood, :street => u.street, :number => u.number, :complement => u.complement, :education_level => u.education_level, :accepted_terms => u.accepted_terms }
+    { :id => u.id.to_s, :name => u.name, :udid => u.udid, :status => u.status, :status_message => u.status_message, :picture => u.picture, :doc_front => u.doc_front, :doc_back => u.doc_back, :membership => u.membership, :civil_registry => u.civil_registry, :cpf => u.cpf, :birthday => u.birthday, :marital_status => u.marital_status, :occupation => u.occupation, :cep => u.cep, :state => u.state, :city => u.city, :neighborhood => u.neighborhood, :street => u.street, :number => u.number, :complement => u.complement, :education_level => u.education_level, :accepted_terms => u.accepted_terms }
   end
 
 

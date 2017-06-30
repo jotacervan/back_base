@@ -17,6 +17,7 @@ class Webservices::AccountController < WebservicesController
 	    :name => 'Fulano de Tal', 
 	    :udid => 123123, 
 	    :status => 1,
+	    :status_message => 'Aguardando aprovacão da torcida!',
 	    :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
 	    :doc_front => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
 	    :doc_back => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
