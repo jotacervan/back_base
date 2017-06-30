@@ -112,7 +112,7 @@
                           </div>
                           
                           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-                          	<div class="row">
+                            <div class="row">
                           		<div class="col-md-6" style="font-size:16px">
                                 <div class="form-group">
                                   <label class="control-label col-md-4 col-sm-4 col-xs-12"> <i class="fa fa-user"></i> &nbsp; Nome</label>
@@ -191,7 +191,17 @@
 
                           		</div>
                           	</div>
-                            
+                            <br>
+                            <div class="row">
+                              <div class="col-md-6 text-center">
+                                <h4>Time</h4>
+                                <%= image_tag(@user.torcida.clube.picture.url(:thumb)) %>
+                              </div>
+                              <div class="col-md-6 text-center">
+                                <h4>Torcida</h4>
+                                <%= image_tag(@user.torcida.picture.url(:thumb)) %>
+                              </div>
+                            </div>
                             
                           </div>
 

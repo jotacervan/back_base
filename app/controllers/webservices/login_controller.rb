@@ -37,8 +37,10 @@ class Webservices::LoginController < WebservicesController
         :number => '123',
         :complement => 'apto 20',
   			:education_level => 'Bacharel', 
+        :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+        :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
   			:accepted_terms => true,
-        :payment => true
+        :payment => true,
   		} 
   	} "
   	example "Exemplo de retorno quando senha for incorreta
@@ -108,6 +110,8 @@ class Webservices::LoginController < WebservicesController
           :number => '123',
           :complement => 'apto 20',
   	  		:education_level => 'Bacharel', 
+          :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+          :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
   	  		:accepted_terms => true
           :payment => true
   	  	}
@@ -182,6 +186,8 @@ class Webservices::LoginController < WebservicesController
           :number => '123',
           :complement => 'apto 20',
   	  		:education_level => 'Bacharel', 
+          :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+          :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
   	  		:accepted_terms => true ,
           :payment => true
   	  	}
@@ -246,6 +252,8 @@ class Webservices::LoginController < WebservicesController
           :number => '123',
           :complement => 'apto 20',
   	  		:education_level => 'Bacharel',
+          :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+          :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
   	  		:accepted_terms => true,
           :payment => true
   	  	}
@@ -314,6 +322,8 @@ class Webservices::LoginController < WebservicesController
           :number => '123',
           :complement => 'apto 20',
           :education_level => 'Bacharel',
+          :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+          :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
           :accepted_terms => true,
           :payment => true
         }
@@ -387,6 +397,8 @@ class Webservices::LoginController < WebservicesController
           :number => '123',
           :complement => 'apto 20',
           :education_level => 'Bacharel',
+          :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+          :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
           :accepted_terms => true,
           :payment => true
         }
@@ -452,6 +464,8 @@ class Webservices::LoginController < WebservicesController
           :number => '123',
           :complement => 'apto 20',
           :education_level => 'Bacharel',
+          :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+          :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
           :accepted_terms => true,
           :payment => true
         }

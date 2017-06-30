@@ -1,5 +1,6 @@
 class TorcidasController < ApplicationController
   def index
+    @torcidas = Torcida.all
   end
 
   def new

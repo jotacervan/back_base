@@ -2,7 +2,7 @@ class ClubesController < ApplicationController
   def index
     @clubes = Clube.all
   end
-
+  
   def new
     @clube = Clube.new
   end
@@ -11,6 +11,7 @@ class ClubesController < ApplicationController
   end
 
   def show
+    @clube = Clube.find(params[:id]) rescue nil
   end
 
   def create
@@ -27,6 +28,14 @@ class ClubesController < ApplicationController
   end
 
   def destroy
+    @clube = Clube.find(params[:id]) rescue nil
+
+    if @clube.nil?
+      redirect_to clubes_path
+    else
+      @clube.destroy
+      redirect_to clubes_path
+    end
   end
 
   private
