@@ -33,6 +33,13 @@ class User
   field :marital_status, type: String
   field :occupation, type: String
   field :address, type: String
+  field :cep, type: String
+  field :state, type: String
+  field :city, type: String
+  field :neighborhood, type: String
+  field :street, type: String
+  field :number, type: String
+  field :complement, type: String
   field :education_level, type: String
   field :accepted_terms, type: Mongoid::Boolean, default: false
   field :picture_file_name, type: String

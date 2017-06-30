@@ -28,7 +28,7 @@ class Webservices::LoginController < WebservicesController
   			:birthday => '99/99/1999', 
   			:marital_status => 'Casado', 
   			:occupation => 'Pedreiro', 
-  			:address => 'Rua Teste 34, Pinheiro, São Paulo - SP', 
+  			:address => 'Rua Teste 34, Pinheiro, São Paulo - SP',
   			:education_level => 'Bacharel', 
   			:accepted_terms => true
   		} 
@@ -239,54 +239,69 @@ class Webservices::LoginController < WebservicesController
 	end
 
 
-
-  # =============================================================
-  #                         GET ABOUT METHOD
-  # =============================================================
-  api :GET, '/login/getAbout', "Get About User"
-  formats ['json']
-  error 401, "Faça o login para continuar"
-  error 402, "Usuário não encontrado"
-  error 500, "Erro desconhecido"
-  example "Exemplo de retorno
+    # =============================================================
+    #                    UPDATE ADDRESS METHOD
+    # =============================================================
+    api :POST, '/login/update_address', "Update Address From User"
+    formats ['json']
+    param :id, String, :desc => 'Ex: 1234123hb14b1234i12,
+ ID é encontrado no json de retorno param[:user][:id]', :required => true, :missing_message => lambda { "id é requerido" }
+    param :cep, String, :desc => 'CEP', :required => true, :missing_message => lambda { "CEP é requerido" }
+    param :state, String, :desc => 'Estado', :required => true, :missing_message => lambda { "Estado é requerido" }
+    param :city, String, :desc => 'Cidade', :required => true, :missing_message => lambda { "Cidade é requerido" }
+    param :neighborhood, String, :desc => 'Bairro', :required => true, :missing_message => lambda { "Bairro é requerido" }
+    param :street, String, :desc => 'Rua', :required => true, :missing_message => lambda { "Rua é requerido" }
+    param :number, String, :desc => 'Numero', :required => true, :missing_message => lambda { "Numero é requerido" }
+    param :complement, String, :desc => 'Complemento', :required => false
+    error 404, "Usuario não encontrado no sistema"
+    error 500, "Erro desconhecido"
+    example "Exemplo de retorno quando endereço for inserido com sucesso 
     
-  { 
-      :message => 'Informações carregadas com sucesso', 
-      :user => {
-        :id => 192863tgv9146v4910y1b4, 
-        :name => 'Fulano de Tal', 
-        :udid => 123123, 
-        :status => 1, 
-        :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
-        :doc_front => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
-        :doc_back => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
-        :membership => '82736482', 
-        :civil_registry => '123123', 
-        :cpf => '999.999.999-99', 
-        :birthday => '99/99/1999', 
-        :marital_status => 'Casado', 
-        :occupation => 'Pedreiro', 
-        :address => 'Rua Teste 34, Pinheiro, São Paulo - SP', 
-        :education_level => 'Bacharel', 
-        :accepted_terms => true
-      }
-  }"
-  example "Exemplo de retorno quando não estiver feito login
+    { 
+      :message => 'Endereço inserido com sucesso',
+        :user => { 
+          :id => 192863tgv9146v4910y1b4,
+          :name => 'Fulano de Tal',
+          :udid => 123123,
+          :status => 1,
+          :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
+          :doc_front => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
+          :doc_back => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
+          :membership => '82736482',
+          :civil_registry => '123123',
+          :cpf => '999.999.999-99',
+          :birthday => '99/99/1999',
+          :marital_status => 'Casado', 
+          :occupation => 'Pedreiro',
+          :address => 'Rua Teste 34, Pinheiro, São Paulo - SP', 
+          :education_level => 'Bacharel',
+          :accepted_terms => true
+        }
+    }"
+    example "Exemplo de retorno quando usuario não for encontrado 
 
-  { 
-    :message => 'Faça o login para continuar',
-  }"
-  example "Exemplo de retorno quando não forem encontradas perguntas
+    { 
+      :message => 'Usuario não encontrado no sistema'
+    }"
+    def update_address
+      u = User.find(params[:id]) rescue nil
 
-  { 
-    :message => 'Nenhuma informação disponível',
-  }"
-  def getAbout
-    if current_user.nil?
-      render :json => { :message => 'Nenhuma informação disponível' }, :status => 402
-    else
-      render :json => { :message => 'Informações carregadas com sucesso', :user => User.mapuser(current_user) }
+      if u.nil?
+        render :json => { :message => 'Usuario não encontrado no sistema' }, :status => 404
+      else
+        u.cep = params[:cep].nil? ? '' : params[:cep]
+        u.state = params[:state].nil? ? '' : params[:state]
+        u.city = params[:city].nil? ? '' : params[:city]
+        u.neighborhood = params[:neighborhood].nil? ? '' : params[:neighborhood]
+        u.street = params[:street].nil? ? '' : params[:street]
+        u.number = params[:number].nil? ? '' : params[:number]
+        u.complement = params[:complement].nil? ? '' : params[:complement]
+        u.status = 3
+        u.save(validate: false)
+        
+        render :json => { :message => 'Endereço inserido com sucesso', :user => User.mapuser(u) }
+      end
     end
-  end
+
 
 end
