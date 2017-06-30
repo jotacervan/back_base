@@ -8,6 +8,7 @@ class ClubesController < ApplicationController
   end
 
   def edit
+    @clube = Clube.find(params[:id])
   end
 
   def show
@@ -18,13 +19,20 @@ class ClubesController < ApplicationController
     @clube = Clube.new(clube_params)
 
     if @clube.save
-      render json: { :message => 'Sucesso' }
+      redirect_to edit_clube_path(@clube.id)
     else
-      render json: { :message => 'Erro' }
+      render 'new'
     end
   end
 
   def update
+    @clube = Clube.find(params[:id])
+
+    if @clube.update(clube_params)
+      redirect_to edit_clube_path(@clube.id)
+    else
+      render 'edit'
+    end
   end
 
   def destroy

@@ -35,6 +35,8 @@ class Webservices::AccountController < WebservicesController
         :number => '123',
         :complement => 'apto 20',
 	    :education_level => 'Bacharel', 
+	    :time_name => 'Nome do Time',
+        :torcida_name => 'Nome da Torcida',
 	    :time_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
         :torcida_logo => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
 	    :accepted_terms => true,
