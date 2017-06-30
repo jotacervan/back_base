@@ -57,6 +57,9 @@ class User
   field :udid, type: String
   field :security_question, type: String
   field :security_answer, type: String
+  field :payment, type: Mongoid::Boolean, default: false
+  field :approved_torcida, type: Mongoid::Boolean, default: false
+  field :approved_time, type: Mongoid::Boolean, default: false
   
   has_mongoid_attached_file :picture, 
     :styles => { :medium => "320x320>", :thumb => "160x160#" },
@@ -103,7 +106,7 @@ class User
   end
 
   def self.mapuser (u)
-    { :id => u.id.to_s, :name => u.name, :udid => u.udid, :status => u.status, :status_message => u.status_message, :picture => u.picture, :doc_front => u.doc_front, :doc_back => u.doc_back, :membership => u.membership, :civil_registry => u.civil_registry, :cpf => u.cpf, :birthday => u.birthday, :marital_status => u.marital_status, :occupation => u.occupation, :cep => u.cep, :state => u.state, :city => u.city, :neighborhood => u.neighborhood, :street => u.street, :number => u.number, :complement => u.complement, :education_level => u.education_level, :accepted_terms => u.accepted_terms }
+    { :id => u.id.to_s, :name => u.name, :udid => u.udid, :status => u.status, :status_message => u.status_message, :picture => u.picture, :doc_front => u.doc_front, :doc_back => u.doc_back, :membership => u.membership, :civil_registry => u.civil_registry, :cpf => u.cpf, :birthday => u.birthday, :marital_status => u.marital_status, :occupation => u.occupation, :cep => u.cep, :state => u.state, :city => u.city, :neighborhood => u.neighborhood, :street => u.street, :number => u.number, :complement => u.complement, :education_level => u.education_level, :accepted_terms => u.accepted_terms, :payment => u.payment }
   end
 
 

@@ -37,7 +37,8 @@ class Webservices::LoginController < WebservicesController
         :number => '123',
         :complement => 'apto 20',
   			:education_level => 'Bacharel', 
-  			:accepted_terms => true
+  			:accepted_terms => true,
+        :payment => true
   		} 
   	} "
   	example "Exemplo de retorno quando senha for incorreta
@@ -108,6 +109,7 @@ class Webservices::LoginController < WebservicesController
           :complement => 'apto 20',
   	  		:education_level => 'Bacharel', 
   	  		:accepted_terms => true
+          :payment => true
   	  	}
   	}"
   	example "Exemplo de retorno quando CPF já tiver cadastro 
@@ -180,7 +182,8 @@ class Webservices::LoginController < WebservicesController
           :number => '123',
           :complement => 'apto 20',
   	  		:education_level => 'Bacharel', 
-  	  		:accepted_terms => true 
+  	  		:accepted_terms => true ,
+          :payment => true
   	  	}
   	} "
   	example "Exemplo de retorno quando usuario não for encontrado 
@@ -243,7 +246,8 @@ class Webservices::LoginController < WebservicesController
           :number => '123',
           :complement => 'apto 20',
   	  		:education_level => 'Bacharel',
-  	  		:accepted_terms => true
+  	  		:accepted_terms => true,
+          :payment => true
   	  	}
   	}"
   	example "Exemplo de retorno quando usuario não for encontrado 
@@ -310,7 +314,8 @@ class Webservices::LoginController < WebservicesController
           :number => '123',
           :complement => 'apto 20',
           :education_level => 'Bacharel',
-          :accepted_terms => true
+          :accepted_terms => true,
+          :payment => true
         }
     }"
     example "Exemplo de retorno quando usuario não for encontrado 
@@ -382,7 +387,8 @@ class Webservices::LoginController < WebservicesController
           :number => '123',
           :complement => 'apto 20',
           :education_level => 'Bacharel',
-          :accepted_terms => true
+          :accepted_terms => true,
+          :payment => true
         }
     }"
     example "Exemplo de retorno quando usuario não for encontrado 
@@ -403,6 +409,67 @@ class Webservices::LoginController < WebservicesController
         u.occupation = params[:occupation].nil? ? '' : params[:occupation]
         u.education_level = params[:education_level].nil? ? '' : params[:education_level]
         u.status = 2
+        u.save(validate: false)
+        
+        render :json => { :message => 'Dados inserido com sucesso', :user => User.mapuser(u) }
+      end
+    end
+
+    # =============================================================
+    #                    SET PAYMENT METHOD
+    # =============================================================
+    api :POST, '/login/set_payment', "Set Payment"
+    formats ['json']
+    param :id, String, :desc => 'Ex: 1234123hb14b1234i12,
+ ID é encontrado no json de retorno param[:user][:id]', :required => true, :missing_message => lambda { "id é requerido" }
+    param :payment, Boolean, :desc => 'Pagamento', :required => true, :missing_message => lambda { "Pagamento é requerido" }
+
+    error 404, "Usuario não encontrado no sistema"
+    error 500, "Erro desconhecido"
+    example "Exemplo de retorno quando dados forem inseridos com sucesso 
+      
+    { 
+      :message => 'Dados inseridos com sucesso',
+        :user => { 
+          :id => 192863tgv9146v4910y1b4,
+          :name => 'Fulano de Tal',
+          :udid => 123123,
+          :status => 1,
+          :status_message => 'Aguardando aprovacão da torcida!',
+          :picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
+          :doc_front => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
+          :doc_back => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989',
+          :membership => '82736482',
+          :civil_registry => '123123',
+          :cpf => '999.999.999-99',
+          :birthday => '99/99/1999',
+          :marital_status => 'Casado', 
+          :occupation => 'Pedreiro',
+          :cep => '13413-324', 
+          :state => 'SP',
+          :city => 'São Paulo',
+          :neighborhood => 'Pinheiros',
+          :street => 'Rua teste',
+          :number => '123',
+          :complement => 'apto 20',
+          :education_level => 'Bacharel',
+          :accepted_terms => true,
+          :payment => true
+        }
+    }"
+    example "Exemplo de retorno quando usuario não for encontrado 
+
+    { 
+      :message => 'Usuario não encontrado no sistema'
+    }"
+    def set_payment
+      u = User.find(params[:id]) rescue nil
+
+      if u.nil?
+        render :json => { :message => 'Usuario não encontrado no sistema' }, :status => 404
+      else
+        u.payment = params[:payment].nil? ? '' : params[:payment]
+        u.status = 6
         u.save(validate: false)
         
         render :json => { :message => 'Dados inserido com sucesso', :user => User.mapuser(u) }

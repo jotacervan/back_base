@@ -35,7 +35,8 @@ class Webservices::AccountController < WebservicesController
         :number => '123',
         :complement => 'apto 20',
 	    :education_level => 'Bacharel', 
-	    :accepted_terms => true
+	    :accepted_terms => true,
+	    :payment => true
 	  }
 	}"
 	example "Exemplo de retorno quando não estiver feito login
@@ -49,11 +50,11 @@ class Webservices::AccountController < WebservicesController
 	:message => 'Nenhuma informação disponível',
 	}"
 	def getAbout
-	if current_user.nil?
-	  render :json => { :message => 'Nenhuma informação disponível' }, :status => 402
-	else
-	  render :json => { :message => 'Informações carregadas com sucesso', :user => User.mapuser(current_user) }
-	end
+		if current_user.nil?
+		  render :json => { :message => 'Nenhuma informação disponível' }, :status => 402
+		else
+		  render :json => { :message => 'Informações carregadas com sucesso', :user => User.mapuser(current_user) }
+		end
 	end
 
 end

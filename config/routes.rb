@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :users
   resources :clubes
   resources :torcidas
+  resources :questions
   
   # ===========================
   # 	    WEBSERVICES
@@ -25,7 +26,8 @@ Rails.application.routes.draw do
   	post '/login/update_question'
     post '/login/update_address'
     post '/login/complete_login'
-
+    post '/login/set_payment'
+    
     # ===========================
     #        LOGIN METHODS 
     # ===========================
