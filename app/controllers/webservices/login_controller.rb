@@ -422,7 +422,6 @@ class Webservices::LoginController < WebservicesController
     formats ['json']
     param :id, String, :desc => 'Ex: 1234123hb14b1234i12,
  ID é encontrado no json de retorno param[:user][:id]', :required => true, :missing_message => lambda { "id é requerido" }
-    param :payment
 
     error 404, "Usuario não encontrado no sistema"
     error 500, "Erro desconhecido"
