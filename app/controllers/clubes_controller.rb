@@ -1,4 +1,5 @@
 class ClubesController < ApplicationController
+  before_action :authenticate_user!
   def index
     @clubes = Clube.all
   end

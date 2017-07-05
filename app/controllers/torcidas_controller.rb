@@ -1,4 +1,6 @@
 class TorcidasController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @torcidas = Torcida.all
   end

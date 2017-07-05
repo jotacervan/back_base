@@ -91,7 +91,7 @@ class User
   validates_attachment_size :doc_back, :less_than => 5.megabytes
   validates_attachment_content_type :doc_back, :content_type => ['image/jpeg', 'image/png', 'image/jpg']
 
-  ## Confirmable
+  ## Confirmables
   # field :confirmation_token,   type: String
   # field :confirmed_at,         type: Time
   # field :confirmation_sent_at, type: Time
@@ -100,6 +100,7 @@ class User
   after_create :backlog
   belongs_to :torcida, optional: true
   has_many :backlogs, dependent: :destroy
+  has_many :questions, dependent: :destroy
   
   def backlog
     Backlog.create(:description => self.name + ' realizou o cadastrou no aplicativo', :user_id => self.id)

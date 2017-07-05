@@ -3,6 +3,9 @@ class Question
   include Mongoid::Timestamps
   
   field :question, type: String
+  field :answer, type: String
+  
+  belongs_to :user, optional: :true
 
   def self.mapQuestions(q)
   	arr = []
