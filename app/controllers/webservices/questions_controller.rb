@@ -40,7 +40,7 @@ class Webservices::QuestionsController < WebservicesController
 	param :udid, String, :desc => 'UDID do novo celular'
 	param :answers, Array, :desc => 'Array com as respostas do usuário'
 	error 401, "Faça o login para continuar"
-	error 402, "Usuário não encontrado"
+	error 202, "Respostas inválidas"
 	error 500, "Erro desconhecido"
 	example "Exemplo de array de respostas para envio
   		
@@ -75,10 +75,10 @@ class Webservices::QuestionsController < WebservicesController
 				okay += 1
 			end
 		end
-
+		
 		if okay < 3
 			questions = current_user.questions.where(:id.nin => ids)
-			render :json => { :message => 'Respostas inválidas', :questions => Question.mapQuestions(questions) }, :status => 402
+			render :json => { :message => 'Respostas inválidas', :questions => Question.mapQuestions(questions) }, :status => 202
 		else
 			current_user.udid = params[:udid]
 			if current_user.save(validate: false)

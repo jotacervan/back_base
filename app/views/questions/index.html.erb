@@ -56,26 +56,12 @@
                       <thead>
                         <tr>
                           <th>Pergunta</th>
-                          <th>Opções</th>
                         </tr>
                       </thead>
                       <tbody>
                       	<% @questions.each do |u| %>
                         <tr>
-                          <td><%= u.question %></td>
-                          <td>
-                          	  <div class="btn-group">
-		                          <button type="button" class="btn btn-default">Opções</button>
-		                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-		                            <span class="caret"></span>
-		                            <span class="sr-only">Toggle Dropdown</span>
-		                          </button>
-		                          <ul class="dropdown-menu" role="menu">
-		                              <li><a href="<%= edit_question_path(u.id) %>"><i class="fa fa-pencil"></i> Editar Pergunta</a></li>
-		                              <li><a href="<%= question_path(u.id) %>" data-confirm="Tem certeza que deseja deletar a questao <%= u.question %>?" data-method="delete" rel="nofollow"><i class="fa fa-trash"></i> Deletar Pergunta</a></li>
-		                          </ul>
-		                      </div>
-                          </td>
+                          <td><%= u %></td>
                         </tr>
                         <% end %>
                       </tbody>
