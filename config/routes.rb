@@ -36,17 +36,18 @@ Rails.application.routes.draw do
 	  # ===========================
   	# 	   QUESTION METHODS 
   	# ===========================
-  	get '/questions/getQuestion'
+  	get  '/questions/getQuestion'
+    post '/questions/checkQuestion'
     
     # ===========================
-    #      TIME METHODS
+    #        TIME METHODS
     # ===========================
-    get '/times/getTimes'
+    get  '/times/getTimes'
 
     # ===========================
     #      TORCIDAS METHODS 
     # ===========================
-    get '/torcidas/getTorcidas'
+    get  '/torcidas/getTorcidas'
   end
 
  
