@@ -76,7 +76,7 @@ class Webservices::QuestionsController < WebservicesController
 			end
 		end
 		
-		if okay < 3
+		if okay < params[:answers].length
 			questions = current_user.questions.where(:id.nin => ids)
 			render :json => { :message => 'Respostas inválidas', :questions => Question.mapQuestions(questions) }, :status => 202
 		else
