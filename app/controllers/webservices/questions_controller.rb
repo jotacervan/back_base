@@ -12,8 +12,7 @@ class Webservices::QuestionsController < WebservicesController
   	
 	{ 
 		:message => 'Questão carregada com sucesso',
-		:question => 'Pergunta ?',
-		:asnwer => 'Resposta.'
+		:questions => ['Pergunta 2?','Pergunta 2?', 'Pergunta 3?']
 	}"
 	example "Exemplo de retorno quando não estiver feito login
 
@@ -29,7 +28,7 @@ class Webservices::QuestionsController < WebservicesController
 		if current_user.nil?
 			render :json => { :message => 'Usuário não encontrado' }, :status => 402
 		else
-			render :json => { :message => 'Questão carregada com sucesso', :question => current_user.security_question, :answer => current_user.security_answer }
+			render :json => { :message => 'Questão carregada com sucesso', :questions => Question.mapQuestions(current_user.questions) }
 		end
 	end
 end

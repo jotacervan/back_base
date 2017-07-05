@@ -288,23 +288,23 @@ class Webservices::LoginController < WebservicesController
           { :question => 'Pergunta 3?', :answer => 'Resposta 3' }
       ]
     }"
-	def update_question
-		u = User.find(params[:id]) rescue nil
+  	def update_question
+  		u = User.find(params[:id]) rescue nil
 
-		if u.nil?
-			render :json => { :message => 'Usuario não encontrado no sistema' }, :status => 404
-		else
-			params[:questions].each do |q|
-        u.questions.create(:question => q.question, :answer => q.answer)
-      end
-			u.status = 5
-			u.save(validate: false)
-			
-			render :json => { :message => 'Questão inserida com sucesso', :user => User.mapuser(u) }
-		end
-	end
+  		if u.nil?
+  			render :json => { :message => 'Usuario não encontrado no sistema' }, :status => 404
+  		else
+  			params[:questions].each do |q|
+          u.questions.create(:question => q.question, :answer => q.answer)
+        end
+  			u.status = 5
+  			u.save(validate: false)
+  			
+  			render :json => { :message => 'Questão inserida com sucesso', :user => User.mapuser(u) }
+  		end
+  	end
 
-
+    
     # =============================================================
     #                    UPDATE ADDRESS METHOD
     # =============================================================
