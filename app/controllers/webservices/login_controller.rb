@@ -94,7 +94,7 @@ class Webservices::LoginController < WebservicesController
   	  	:user => { 
   	  		:id => 192863tgv9146v4910y1b4, 
   	  		:name => 'Fulano de Tal', 
-  	  		:udid => 123123, 
+  	  		:udid => 123123,
   	  		:status => 1,
           :status_message => 'Aguardando aprovacão da torcida!',
   	  		:membership => '82736482',
@@ -295,7 +295,7 @@ class Webservices::LoginController < WebservicesController
   			render :json => { :message => 'Usuario não encontrado no sistema' }, :status => 404
   		else
   			params[:questions].each do |q|
-          u.questions.create(:question => q.question, :answer => q.answer)
+          u.questions.create(:question => q[:question], :answer => q[:answer])
         end
   			u.status = 5
   			u.save(validate: false)
