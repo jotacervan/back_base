@@ -12,7 +12,8 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-
+/docker-compose.yml
+/Dockerfile
 /node_modules
 /yarn-error.log
 
