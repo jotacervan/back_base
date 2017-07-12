@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_admin
 
   def index
     @users = User.where(:user_type => 'User')
@@ -7,6 +8,14 @@ class UsersController < ApplicationController
   end
 
   def create
+  end
+
+  def approve_user
+    @user = User.find(params[:id])
+
+    @user.approved_torcida = true
+    @user.save(validate: false)
+    redirect_to root_path
   end
 
   def new

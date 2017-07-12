@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_admin
   
   def index
     @questions = Question.all.distinct(:question)

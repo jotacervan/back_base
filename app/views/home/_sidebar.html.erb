@@ -19,7 +19,7 @@
             <!-- /menu profile quick info -->
             
             <br />
-             
+            
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
@@ -27,6 +27,7 @@
                 <ul class="nav side-menu">
                   <li <% if @page == 'Home' %> class="active" <% end %> ><a href="<%= root_path %>"><i class="fa fa-home"></i> Home</a>
                   </li>
+                  <% if current_user.user_type == 'superUser' %>
                   <li><a href="<%= users_path %>"><i class="fa fa-user"></i> Usuários</a>
                   </li>
                   <li><a href="#"><i class="fa fa-table"></i> Perguntas <span class="fa fa-chevron-down"></span></a>
@@ -36,16 +37,19 @@
                   </li>
                   <li><a href="#"><i class="fa fa-table"></i> Times <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+                      <li><a href="/clubes/new_manager">Novo Admin</a></li>
                       <li><a href="<%= new_clube_path %>">Novo Time</a></li>
                       <li><a href="<%= clubes_path %>">Ver Times</a></li>
                     </ul>
                   </li>
                   <li><a href="#"><i class="fa fa-users"></i> Torcidas <span class="fa fa-chevron-down"></span></a> 
                     <ul class="nav child_menu">
+                      <li><a href="/torcidas/new_manager">Novo Admin</a></li>
                       <li><a href="<%= new_torcida_path %>">Nova Torcida</a></li>
                       <li><a href="<%= torcidas_path %>">Ver Torcidas</a></li>
                     </ul>
                   </li>
+                  <% end %>
                 </ul>
               </div>
             </div>

@@ -1,5 +1,7 @@
 class ClubesController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_admin
+
   def index
     @clubes = Clube.all
   end
@@ -11,9 +13,24 @@ class ClubesController < ApplicationController
   def edit
     @clube = Clube.find(params[:id])
   end
-
+  
   def show
     @clube = Clube.find(params[:id]) rescue nil
+  end
+
+  def new_manager
+    @clubes = Clube.all
+  end
+
+  def create_manager
+    @def = User.new(manager_params)
+
+    if @def.save(validate: false)
+      redirect_to users_path, notice: 'Administrador criado com sucesso'
+    else
+      redirect_to users_path, alert: 'Erro ao criar administrador'
+    end
+
   end
 
   def create
@@ -50,5 +67,9 @@ class ClubesController < ApplicationController
   private
     def clube_params
       params.require(:clube).permit(:name,:picture)
+    end
+    
+    def manager_params
+      params.require(:manager).permit(:name,:email,:cpf,:password,:password_confirmation,:torcida_id,:user_type)
     end
 end

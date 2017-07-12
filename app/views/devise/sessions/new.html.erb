@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -56,7 +56,7 @@
                 
                 <div class="clearfix"></div>
                 <br />
-
+                User
                 <div>
                   <h1><i class="fa fa-users"></i> Torcida Legal!</h1>
                   <p>©2017 All Rights Reserved. Torcida Legal!</p>
@@ -67,5 +67,14 @@
         </div>
       </div>
   </div>
+  <% if flash[:notice] %>
+    <script type="text/javascript">
+      alert('<%= flash[:notice] %>');
+    </script>
+  <% elsif flash[:alert] %>
+    <script type="text/javascript">
+      alert('<%= flash[:alert] %>');
+    </script>
+  <% end %>
 </body>
 </html>

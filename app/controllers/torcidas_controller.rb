@@ -1,5 +1,6 @@
 class TorcidasController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_admin
 
   def index
     @torcidas = Torcida.all
@@ -16,6 +17,21 @@ class TorcidasController < ApplicationController
   end
 
   def show
+  end
+
+  def new_manager
+    @torcidas = Torcida.all
+  end
+
+  def create_manager
+    @def = User.new(manager_params)
+
+    if @def.save(validate: false)
+      redirect_to users_path, notice: 'Administrador criado com sucesso'
+    else
+      redirect_to users_path, alert: 'Erro ao criar administrador'
+    end
+
   end
 
   def create
@@ -51,5 +67,9 @@ class TorcidasController < ApplicationController
   private
     def torcida_params
       params.require(:torcida).permit(:name,:picture,:clube_id)
+    end
+
+    def manager_params
+      params.require(:manager).permit(:name,:email,:cpf,:password,:password_confirmation,:torcida_id,:user_type)
     end
 end

@@ -23,8 +23,10 @@ default: &default
 
 development:
   <<: *default
-  # database: torcidalegal_development
-  url: 'postgres://ezujsvwrfbharw:da6b8b4c6296231b7023e4bdc9c052619a62ee18689f37faa8ad5e956fd648ec@ec2-23-21-246-11.compute-1.amazonaws.com:5432/d2s7bmeh5akod3'
+  database: torcidalegal_development
+  host: db
+  username: postgres
+  password: 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
@@ -58,7 +60,9 @@ development:
 test:
   <<: *default
   database: torcidalegal_test
-
+  host: db
+  username: postgres
+  password: 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.

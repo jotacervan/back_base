@@ -14,4 +14,6 @@
 //= require react
 //= require react_ujs
 //= require components
+//= require sweetalert2
+//= require sweet-alert2-rails
 //= require_tree .

@@ -8,7 +8,7 @@ class Webservices::TorcidasController < WebservicesController
 	error 402, "Nenhum time encontrado"
 	error 500, "Erro desconhecido"
 	example "Exemplo de retorno
-
+	
 	{ 
 		:message => 'Times carregados com sucesso',
 		:torcidas => [

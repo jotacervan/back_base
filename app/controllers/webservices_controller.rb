@@ -7,5 +7,4 @@ class WebservicesController < ApplicationController
 			render :json => { :message => 'Faça o seu login para continuar' }, status: 401
 		end
 	end
-	
 end
