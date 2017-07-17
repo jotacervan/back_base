@@ -7,6 +7,7 @@ class Torcida
   field :picture_file_name, type: String
   field :picture_file_size, type: String
   field :picture_content_type, type: String
+  field :active, type: Integer, default: 1
 
   belongs_to :clube
   has_many :users

@@ -27,7 +27,7 @@ class Webservices::TorcidasController < WebservicesController
 		:message => 'Nenhuma torcida encontrada',
 	}"
 	def getTorcidas
-		t = Torcida.where(:clube_id => params[:id])
+		t = Torcida.where(:clube_id => params[:id], :active => 1)
 		
 		if t.blank?
 			render :json => { :message => 'Nenhuma torcida encontrada' }, :status => 402

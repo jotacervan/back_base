@@ -18,6 +18,24 @@ class TorcidasController < ApplicationController
 
   def show
   end
+  
+  def active
+    @torcida = Torcida.find(params[:id])
+    if @torcida.update(:active => 1)
+      redirect_to torcidas_path, notice: 'Torcida ativada com sucesso'
+    else
+      redirect_to torcidas_path, alert: 'Não foi possivel ativar o torcida, tente novamente mais tarde'
+    end
+  end
+  
+  def desactive
+    @torcida = Torcida.find(params[:id])
+    if @torcida.update(:active => 0)
+      redirect_to torcidas_path, notice: 'Torcida desativada com sucesso'
+    else
+      redirect_to torcidas_path, alert: 'Não foi possivel desativar a torcida, tente novamente mais tarde'
+    end
+  end
 
   def new_manager
     @torcidas = Torcida.all

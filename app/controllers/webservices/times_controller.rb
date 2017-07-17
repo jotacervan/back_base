@@ -26,7 +26,7 @@ class Webservices::TimesController < WebservicesController
 		:message => 'Nenhum time encontrado',
 	}"
 	def getTimes
-		c = Clube.all
+		c = Clube.where(:active => 1)
 		
 		if c.nil?
 			render :json => { :message => 'Nenhum time encontrado' }, :status => 402

@@ -58,6 +58,7 @@
                           <th>Nome</th>
                           <th>Time</th>
                           <th>Thumb</th>
+                          <th>Status</th>
                           <th style="width:80px">Opções</th>
                         </tr>
                       </thead>
@@ -68,6 +69,13 @@
                           <td><%= u.clube.name %></td>
                           <td><%= image_tag(u.picture.url(:thumb)) %></td>
                           <td>
+                            <% if u.active > 0 %>
+                              <div class="label label-success">Ativo</div>
+                            <% else %>
+                              <div class="label label-danger">Inativo</div>
+                            <% end %>
+                          </td>
+                          <td>
                               <div class="btn-group">
                               <button type="button" class="btn btn-default">Opções</button>
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -77,6 +85,11 @@
                               <ul class="dropdown-menu" role="menu">
                                   <li><a href="<%= edit_torcida_path(u.id) %>"><i class="fa fa-pencil"></i> Editar Torcida</a></li>
                                   <li><a href="<%= torcida_path(u.id) %>" data-confirm="Tem certeza que deseja deletar a Torcida <%= u.name %>?" data-method="delete" rel="nofollow"><i class="fa fa-trash"></i> Deletar Time</a></li>
+                                  <% if u.active > 0 %>
+                                    <li><a href="<%= torcida_desactive_path(u.id) %>"><i class="fa fa-close"></i> Desativar</a></li>
+                                  <% else %>
+                                    <li><a href="<%= torcida_active_path(u.id) %>"><i class="fa fa-check"></i> Ativar</a></li>
+                                  <% end %>
                               </ul>
                           </div>
                           </td>

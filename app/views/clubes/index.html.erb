@@ -58,6 +58,7 @@
                           <th>Nome</th>
                           <th>Thumb</th>
                           <th>Torcidas</th>
+                          <th>Status</th>
                           <th style="width:80px">Opções</th>
                         </tr>
                       </thead>
@@ -68,6 +69,13 @@
                           <td><%= image_tag(u.picture.url(:thumb)) %></td>
                           <td><%= u.torcidas.count %></td>
                           <td>
+                            <% if u.active > 0 %>
+                              <div class="label label-success">Ativo</div>
+                            <% else %>
+                              <div class="label label-danger">Inativo</div>
+                            <% end %>
+                          </td>
+                          <td>
                               <div class="btn-group">
                               <button type="button" class="btn btn-default">Opções</button>
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -77,6 +85,11 @@
                               <ul class="dropdown-menu" role="menu">
                                   <li><a href="<%= edit_clube_path(u.id) %>"><i class="fa fa-pencil"></i> Editar Time</a></li>
                                   <li><a href="<%= clube_path(u.id) %>" data-confirm="Tem certeza que deseja deletar a Time <%= u.name %>? Todas as torcidas ligadas a ele serão deletadas!" data-method="delete" rel="nofollow"><i class="fa fa-trash"></i> Deletar Time</a></li>
+                                  <% if u.active > 0 %>
+                                    <li><a href="<%= clube_desactive_path(u.id) %>"><i class="fa fa-close"></i> Desativar</a></li>
+                                  <% else %>
+                                    <li><a href="<%= clube_active_path(u.id) %>"><i class="fa fa-check"></i> Ativar</a></li>
+                                  <% end %>
                               </ul>
                           </div>
                           </td>

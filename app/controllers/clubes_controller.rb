@@ -18,6 +18,24 @@ class ClubesController < ApplicationController
     @clube = Clube.find(params[:id]) rescue nil
   end
 
+  def active
+    @clube = Clube.find(params[:id])
+    if @clube.update(:active => 1)
+      redirect_to clubes_path, notice: 'Clube ativado com sucesso'
+    else
+      redirect_to clubes_path, alert: 'Não foi possivel ativar o clube, tente novamente mais tarde'
+    end
+  end
+  
+  def desactive
+    @clube = Clube.find(params[:id])
+    if @clube.update(:active => 0)
+      redirect_to clubes_path, notice: 'Clube desativado com sucesso'
+    else
+      redirect_to clubes_path, alert: 'Não foi possivel desativar o clube, tente novamente mais tarde'
+    end
+  end
+
   def new_manager
     @clubes = Clube.all
   end

@@ -7,7 +7,8 @@ class Clube
   field :picture_file_name, type: String
   field :picture_file_size, type: String
   field :picture_content_type, type: String
-
+  field :active, type: Integer, default: 1
+  
   has_many :torcidas, dependent: :destroy
 
   has_mongoid_attached_file :picture, 
