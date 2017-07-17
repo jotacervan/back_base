@@ -21,10 +21,15 @@ class TorcidasController < ApplicationController
   
   def active
     @torcida = Torcida.find(params[:id])
-    if @torcida.update(:active => 1)
-      redirect_to torcidas_path, notice: 'Torcida ativada com sucesso'
+
+    if @torcida.clube.active > 0
+      if @torcida.update(:active => 1)
+        redirect_to torcidas_path, notice: 'Torcida ativada com sucesso'
+      else
+        redirect_to torcidas_path, alert: 'Não foi possivel ativar o torcida, tente novamente mais tarde'
+      end
     else
-      redirect_to torcidas_path, alert: 'Não foi possivel ativar o torcida, tente novamente mais tarde'
+      redirect_to torcidas_path, alert: 'Time inteiro está desativado, para completar essa ação ative o time primeiro!'
     end
   end
   

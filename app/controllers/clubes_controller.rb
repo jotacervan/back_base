@@ -21,6 +21,9 @@ class ClubesController < ApplicationController
   def active
     @clube = Clube.find(params[:id])
     if @clube.update(:active => 1)
+      @clube.torcidas.each do |t|
+        t.update(:active => 1)
+      end
       redirect_to clubes_path, notice: 'Clube ativado com sucesso'
     else
       redirect_to clubes_path, alert: 'Não foi possivel ativar o clube, tente novamente mais tarde'
@@ -30,6 +33,9 @@ class ClubesController < ApplicationController
   def desactive
     @clube = Clube.find(params[:id])
     if @clube.update(:active => 0)
+      @clube.torcidas.each do |t|
+        t.update(:active => 0)
+      end
       redirect_to clubes_path, notice: 'Clube desativado com sucesso'
     else
       redirect_to clubes_path, alert: 'Não foi possivel desativar o clube, tente novamente mais tarde'
