@@ -189,6 +189,16 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-  
+    
+    <% if flash[:notice] %>
+      <script type="text/javascript">
+        swal('Okay', '<%= flash[:notice] %>', 'success');
+      </script>
+    <% elsif flash[:alert] %>
+      <script type="text/javascript">
+        swal('Ops', '<%= flash[:alert] %>', 'warning');
+      </script>
+    <% end %>
+
   </body>
 </html>

@@ -19,12 +19,14 @@ Rails.application.routes.draw do
   # ===========================
   get 'clube_active/:id' => 'clubes#active', as: :clube_active
   get 'clube_desactive/:id' => 'clubes#desactive', as: :clube_desactive
+  get 'clube_admins' => 'clubes#admins', as: :clube_admins
 
   # ===========================
   #        TORCIDAS ROUTES
   # ===========================
   get 'torcida_active/:id' => 'torcidas#active', as: :torcida_active
   get 'torcida_desactive/:id' => 'torcidas#desactive', as: :torcida_desactive
+  get 'torcida_admins' => 'torcidas#admins', as: :torcida_admins
 
   # ===========================
   #     NEW MANAGERS ROUTES
