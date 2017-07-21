@@ -1,23 +1,44 @@
 class ClubesController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
-
+  # ==============================
+  #             INDEX
+  # ==============================
   def index
     @clubes = Clube.all
   end
   
+  # ==============================
+  #               NEW
+  # ==============================
   def new
     @clube = Clube.new
   end
 
+  # ==============================
+  #             EDIT
+  # ==============================
   def edit
     @clube = Clube.find(params[:id])
   end
-  
+
+  # ==============================
+  #             SHOW
+  # ==============================
   def show
     @clube = Clube.find(params[:id]) rescue nil
   end
 
+  # ==============================
+  #             ADMINS
+  # ==============================
+  def admins
+    @users = User.where(:user_type => 'clubeUser')
+  end
+
+  # ==============================
+  #            ACTIVE
+  # ==============================
   def active
     @clube = Clube.find(params[:id])
     if @clube.update(:active => 1)
@@ -30,6 +51,9 @@ class ClubesController < ApplicationController
     end
   end
   
+  # ==============================
+  #           DESACTIVE
+  # ==============================
   def desactive
     @clube = Clube.find(params[:id])
     if @clube.update(:active => 0)
@@ -42,21 +66,70 @@ class ClubesController < ApplicationController
     end
   end
 
+  # ==============================
+  #         NEW MANAGER
+  # ==============================
   def new_manager
     @clubes = Clube.all
   end
 
+  # ==============================
+  #         CREATE MANAGER
+  # ==============================
   def create_manager
+
     @def = User.new(manager_params)
 
     if @def.save(validate: false)
-      redirect_to users_path, notice: 'Administrador criado com sucesso'
+      redirect_to clube_admins_path, notice: 'Administrador criado com sucesso'
     else
-      redirect_to users_path, alert: 'Erro ao criar administrador'
+      redirect_to clube_admins_path, alert: 'Erro ao criar administrador'
     end
-
+    
   end
 
+  # ==============================
+  #       EDIT CLUBES MANAGER
+  # ==============================
+  def edit_clubes_manager
+    @def = User.find(params[:manager][:id])
+
+    params[:manager][:name].blank? ? '' : @def.name = params[:manager][:name]
+    params[:manager][:email].blank? ? '' : @def.email = params[:manager][:email]
+    params[:manager][:cpf].blank? ? '' : @def.cpf = params[:manager][:cpf]
+    params[:manager][:password].blank? ?  '' : @def.password = params[:manager][:password]
+    params[:manager][:password_confirmation].blank? ? ''  : @def.password_confirmation = params[:manager][:password_confirmation]
+    params[:manager][:torcida_id].blank? ? '' : @def.torcida_id = params[:manager][:torcida_id]
+
+    if @def.save(validate: false)
+      redirect_to clube_admins_path, notice: 'Administrador editado com sucesso'
+    else
+      redirect_to clube_admins_path, alert: 'Erro ao criar administrador'
+    end
+  end
+
+  # ==============================
+  #           EDIT MANAGER
+  # ==============================
+  def edit_manager
+    @clubes = Clube.all
+    @manager = User.find(params[:id])
+  end
+
+  # ==============================
+  #       DESTROY MANAGER
+  # ==============================
+  def destroy_manager
+    @manager = User.find(params[:id])
+
+    @manager.destroy
+
+    redirect_to clube_admins_path
+  end
+
+  # ==============================
+  #             CREATE
+  # ==============================
   def create
     @clube = Clube.new(clube_params)
 
@@ -67,6 +140,9 @@ class ClubesController < ApplicationController
     end
   end
 
+  # ==============================
+  #             UPDATE
+  # ==============================
   def update
     @clube = Clube.find(params[:id])
 
@@ -77,6 +153,9 @@ class ClubesController < ApplicationController
     end
   end
 
+  # ==============================
+  #             DESTROY
+  # ==============================
   def destroy
     @clube = Clube.find(params[:id]) rescue nil
 
@@ -88,6 +167,9 @@ class ClubesController < ApplicationController
     end
   end
 
+  # ==============================
+  #             PRIVATE
+  # ==============================
   private
     def clube_params
       params.require(:clube).permit(:name,:picture)

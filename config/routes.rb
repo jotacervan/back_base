@@ -17,6 +17,11 @@ Rails.application.routes.draw do
   # ===========================
   #        CLUBES ROUTES
   # ===========================
+  get 'clubes/new_manager'
+  get 'clubes/edit_manager/:id' => 'clubes#edit_manager', as: :edit_clube_admin
+  delete 'clubes/destroy_manager/:id' => 'clubes#destroy_manager', as: :destroy_clube_manager
+  post 'create_clubes_manager' => 'clubes#create_manager', as: :create_clubes_manager
+  post 'edit_clubes_manager' => 'clubes#edit_clubes_manager', as: :edit_clubes_manager
   get 'clube_active/:id' => 'clubes#active', as: :clube_active
   get 'clube_desactive/:id' => 'clubes#desactive', as: :clube_desactive
   get 'clube_admins' => 'clubes#admins', as: :clube_admins
@@ -24,17 +29,18 @@ Rails.application.routes.draw do
   # ===========================
   #        TORCIDAS ROUTES
   # ===========================
+  get 'torcidas/new_manager'
+  get 'torcidas/edit_manager/:id' => 'torcidas#edit_manager', as: :edit_torcida_admin
+  delete 'torcidas/destroy_manager/:id' => 'torcidas#destroy_manager', as: :destroy_torcida_manager
+  post 'create_torcida_manager' => 'torcidas#create_manager', as: :create_torcida_manager
+  post 'edit_torcida_manager' => 'torcidas#edit_torcida_manager', as: :edit_torcida_manager
   get 'torcida_active/:id' => 'torcidas#active', as: :torcida_active
   get 'torcida_desactive/:id' => 'torcidas#desactive', as: :torcida_desactive
   get 'torcida_admins' => 'torcidas#admins', as: :torcida_admins
 
   # ===========================
-  #     NEW MANAGERS ROUTES
+  #        USERS ROUTES
   # ===========================
-  get 'torcidas/new_manager'
-  get 'clubes/new_manager'
-  post 'create_torcida_manager' => 'torcidas#create_manager', as: :create_torcida_manager
-  post 'create_clubes_manager' => 'clubes#create_manager', as: :create_clubes_manager
   get 'approve_user/:id' => 'user#approve', as: :approve_user
 
   # ===========================

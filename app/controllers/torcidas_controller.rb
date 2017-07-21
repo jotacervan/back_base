@@ -18,6 +18,10 @@ class TorcidasController < ApplicationController
 
   def show
   end
+
+  def admins
+    @users = User.where(:user_type => 'torcidaUser')
+  end
   
   def active
     @torcida = Torcida.find(params[:id])
@@ -50,9 +54,9 @@ class TorcidasController < ApplicationController
     @def = User.new(manager_params)
 
     if @def.save(validate: false)
-      redirect_to users_path, notice: 'Administrador criado com sucesso'
+      redirect_to torcida_admins_path, notice: 'Administrador criado com sucesso'
     else
-      redirect_to users_path, alert: 'Erro ao criar administrador'
+      redirect_to torcida_admins_path, alert: 'Erro ao criar administrador'
     end
 
   end
@@ -64,6 +68,38 @@ class TorcidasController < ApplicationController
       redirect_to edit_torcida_path(@torcida.id)
     else
       render 'new'
+    end
+  end
+
+  def edit_manager
+    @torcidas = Torcida.all
+    @manager = User.find(params[:id])
+  end
+
+  def destroy_manager
+    @user = User.find(params[:id])
+
+    if @user.destroy
+      redirect_to torcida_admins_path, notice: 'Administrador deletado com sucesso'
+    else
+      redirect_to torcida_admins_path, alert: 'Não foi possivel deletar o administrador'
+    end
+  end
+
+  def edit_torcida_manager
+    @def = User.find(params[:manager][:id])
+
+    params[:manager][:name].blank? ? '' : @def.name = params[:manager][:name]
+    params[:manager][:email].blank? ? '' : @def.email = params[:manager][:email]
+    params[:manager][:cpf].blank? ? '' : @def.cpf = params[:manager][:cpf]
+    params[:manager][:password].blank? ?  '' : @def.password = params[:manager][:password]
+    params[:manager][:password_confirmation].blank? ? ''  : @def.password_confirmation = params[:manager][:password_confirmation]
+    params[:manager][:torcida_id].blank? ? '' : @def.torcida_id = params[:manager][:torcida_id]
+
+    if @def.save(validate: false)
+      redirect_to torcida_admins_path, notice: 'Administrador editado com sucesso'
+    else
+      redirect_to torcida_admins_path, alert: 'Erro ao criar administrador'
     end
   end
 
