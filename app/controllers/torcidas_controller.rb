@@ -2,27 +2,45 @@ class TorcidasController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
 
+  # =================================
+  #      INDEX TORCIDAS METHOD
+  # =================================
   def index
     @torcidas = Torcida.all
   end
-
+  
+  # =================================
+  #        TORCIDA NEW METHOD
+  # =================================
   def new
     @torcida = Torcida.new
     @clubes = Clube.all
   end
 
+  # =================================
+  #       EDIT TORCIDA METHOD
+  # =================================
   def edit
     @torcida = Torcida.find(params[:id])
     @clubes = Clube.all
   end
 
+  # =================================
+  #        SHOW TORCIDA METHOD
+  # =================================
   def show
   end
 
+  # =================================
+  #        SHOW ADMINS METHOD
+  # =================================
   def admins
     @users = User.where(:user_type => 'torcidaUser')
   end
   
+  # =================================
+  #      ACTIVATE TORCIDA METHOD
+  # =================================
   def active
     @torcida = Torcida.find(params[:id])
 
@@ -37,6 +55,9 @@ class TorcidasController < ApplicationController
     end
   end
   
+  # =================================
+  #     DESACTIVATE TORCIDA METHOD
+  # =================================
   def desactive
     @torcida = Torcida.find(params[:id])
     if @torcida.update(:active => 0)
@@ -46,10 +67,16 @@ class TorcidasController < ApplicationController
     end
   end
 
+  # =================================
+  #      NEW MANAGER VIEW METHOD
+  # =================================
   def new_manager
     @torcidas = Torcida.all
   end
 
+  # =================================
+  #      CREATE MANAGER METHOD
+  # =================================
   def create_manager
     @def = User.new(manager_params)
 
@@ -61,6 +88,9 @@ class TorcidasController < ApplicationController
 
   end
 
+  # =================================
+  #       CREATE TORCIDA METHOD
+  # =================================
   def create
     @torcida = Torcida.new(torcida_params)
 
@@ -71,11 +101,17 @@ class TorcidasController < ApplicationController
     end
   end
 
+  # =================================
+  #      EDIT MANAGER VIEW METHOD
+  # =================================
   def edit_manager
     @torcidas = Torcida.all
     @manager = User.find(params[:id])
   end
 
+  # =================================
+  #      DESTROY MANAGER METHOD
+  # =================================
   def destroy_manager
     @user = User.find(params[:id])
 
@@ -86,6 +122,9 @@ class TorcidasController < ApplicationController
     end
   end
 
+  # =================================
+  #       EDIT TORCIDA METHOD
+  # =================================
   def edit_torcida_manager
     @def = User.find(params[:manager][:id])
 
@@ -103,6 +142,9 @@ class TorcidasController < ApplicationController
     end
   end
 
+  # =================================
+  #      UPDATE TORCIDA METHOD
+  # =================================
   def update
     @torcida = Torcida.find(params[:id])
 
@@ -113,6 +155,9 @@ class TorcidasController < ApplicationController
     end
   end
 
+  # =================================
+  #      DESTROY TORCIDA METHOD
+  # =================================
   def destroy
     @torcida = Torcida.find(params[:id])
 

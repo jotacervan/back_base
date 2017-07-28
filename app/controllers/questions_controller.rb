@@ -2,10 +2,16 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
   
+  # =================================
+  #            INDEX METHOD
+  # =================================
   def index
     @questions = Question.all.distinct(:question)
   end
 
+  # =================================
+  #           CREATE METHOD
+  # =================================
   def create
     @question = Question.new(question_params)
 
@@ -17,14 +23,23 @@ class QuestionsController < ApplicationController
 
   end
 
+  # =================================
+  #       EDIT QUESTION METHOD
+  # =================================
   def edit
     @question = Question.find(params[:id])
   end
 
+  # =================================
+  #        NEW QUESTION METHOD
+  # =================================
   def new
     @question = Question.new
   end
 
+  # =================================
+  #      DESTROY QUESTION METHOD
+  # =================================
   def destroy
     @question  = Question.find(params[:id]) rescue nil
 
@@ -36,10 +51,16 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # =================================
+  #       SHOW QUESTION METHOD
+  # =================================
   def show
     @question = Question.find(params[:id]) rescue nil
   end
 
+  # =================================
+  #       UPDATE QUESTION METHOD
+  # =================================
   def update
     @question = Question.find(params[:id])
 

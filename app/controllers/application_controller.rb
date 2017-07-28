@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-
+  
+  # ========================================
+  #           CHECK ADMIN METHOD
+  # ========================================
   def check_admin
   	if current_user.user_type == 'superUser'
   				

@@ -131,7 +131,7 @@ class Webservices::LoginController < WebservicesController
   	}"
 	def signup
 		u = User.where(:cpf => params[:cpf]).first
-
+    
 		if !u.nil?
 			render :json => { :message => 'CPF já cadastrado em nosso sistema' }, :status => 403
 		else
